@@ -26,5 +26,13 @@ common.getBase64Image = function(img) {
   // }
 
 
+};
+
+//数据保存成功
+common.savaSuccess = function(msg) {
+      alert(msg);
 }
+
+
+
 export default common

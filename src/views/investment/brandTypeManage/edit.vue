@@ -6,11 +6,11 @@
           {{itemPara}}
         </div>
         <div id="right-up-icon">
-          <span class="rui-icon-text">
+          <span class="rui-icon-text"  @click='save()'>
             <a href="#" class="rui-icon">
               <img src="../../../../static/img/save.png" alt="" />
             </a>
-            <span class="rui-text">
+            <span class="rui-text" >
               <a href="#" class="rui-text-a">
                 保存
               </a>
@@ -41,7 +41,7 @@
           <div class="left">
              <span class="label">品牌类型</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="name" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.name" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
 
@@ -74,7 +74,7 @@ export default {
     return {
       listRes: {}, //服务器端查询的数据
 
-      imgUrlBase: '',
+
 
       //需要显示
       name: '',
@@ -82,6 +82,8 @@ export default {
       showImgInsert: [],
 
       //图片配置
+      imgUrlBase: '',
+
       uploadImgObject: '',
       isBase64: false,
 
@@ -122,21 +124,23 @@ export default {
        this.$emit('cancelEdit', obj);
     },
     save: function(){
-      console.log(this.nickname);
+      var urlbase = this.$http.options.root;
+      var resUrl = urlbase+'/merchant/api/categories/';
+      this.$http.put(resUrl, this.listRes).then(
+        (response)=>{
+          //查询出服务器的数据
+           commonJs.savaSuccess();
+
+        },
+        (err)=>{
+          console.log(err);
+        }
+      );
     },
     //获取图片内容
     getImageValue: function(e){
        var file = e.target.files[0];
        this.uploadImgObject = file;
-
-
-      // console.log();
-      // commonJs.getBase64Image(file).onload = function (e) {
-      //    that.uploadImgObject = this.result;
-      //
-      //   //  console.log(test);
-      // },
-
     },
     upload: function(){
       var that = this;
@@ -355,30 +359,4 @@ export default {
    font-size: 14px;
    color: #fff;
   }
-/*.a-upload{
-  padding: 4px 10px;
-    height: 40px;
-    line-height: 20px;
-    position: relative;
-    cursor: pointer;
-    color: #888;
-    background: #fafafa;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    overflow: hidden;
-    display: inline-block;
-    *display: inline;
-    *zoom: 1
-}
-.inputfile{
-  position: absolute;
-    font-size: 100px;
-    right: 0;
-    top: 0;
-    opacity: 0;
-    filter: alpha(opacity=0);
-    cursor: pointer
-}*/
-
-
 </style>

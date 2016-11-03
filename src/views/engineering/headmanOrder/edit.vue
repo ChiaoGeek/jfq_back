@@ -4,6 +4,7 @@
         <div id="right-up-blank"></div>
         <div id="right-up-text">
           {{listRes.nickname}}
+
         </div>
         <div id="right-up-icon">
           <span class="rui-icon-text" @click='save()'>
@@ -116,8 +117,8 @@
                <!-- <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom> -->
 
                <select class="select" v-model="listRes.available">
-                 <option  value="true" :selected="selected ? true : false">&nbsp;&nbsp;&nbsp;&nbsp;接单</option>
-                 <option  value="false" :selected="selected ?  false : true">&nbsp;&nbsp;&nbsp;&nbsp;不接单</option>
+                 <option  value="true" :selected="listRes.available ? true : false">&nbsp;&nbsp;&nbsp;&nbsp;接单</option>
+                 <option  value="false" :selected="listRes.available ?  false : true">&nbsp;&nbsp;&nbsp;&nbsp;不接单</option>
                </select>
              <span>
           </div>
@@ -157,6 +158,7 @@
 
 <script>
 import right from "components/right/right.vue";
+import commonJs from "src/common.js";
 // import inputCom from "components/input/input.vue";
 export default {
   name: 'hoEdit',
@@ -174,9 +176,7 @@ export default {
   },
   props: ['itemPara'],
   computed: {
-    selected(){
-      return this.listRes.available;
-    }
+
   },
   mounted () {
     //服务器基本地址
@@ -204,7 +204,28 @@ export default {
        this.$emit('cancelEdit', obj);
     },
     save: function(){
-      console.log(this.nickname);
+
+
+      //服务器基本地址
+      var urlbase = this.$http.options.root;
+      //请求的URL
+      var resUrl = urlbase+'/user/api/admin/workmanProfiles/';
+
+      this.$http.post(resUrl, this.listRes).then(
+        (response)=>{
+          //查询出服务器的数据
+          // console.log(response);
+          //this.selected = this.listRes.available;
+          commonJs.savaSuccess('数据保存成功！！！');
+
+
+        },
+        (err)=>{
+          console.log(err);
+        }
+      );
+
+
     },
   },
   components:{
