@@ -1,0 +1,6 @@
+待激活订单      noActiveOrder     no-activeorder
+激活订单        activeOrder       active-order
+银行管理        bankManage        bank-manage
+网点管理        netManage         net-manage
+推荐人管理      recommendManage   recommend-manage
+管家管理        houseKeeper       house-keeper
