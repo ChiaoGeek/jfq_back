@@ -81,71 +81,141 @@
             <th>姓名</th>
             <th>电话</th>
             <th>房屋地址</th>
-            <th>工长一姓名</th>
-            <th>工长一电话</th>
-            <th>工长二姓名</th>
-            <th>工长二电话</th>
             <th>预约时间</th>
-            <th>管家</th>
-            <th>工程管家</th>
-=
           </tr>
 
-          <tr v-for="todo in (1,20)">
-            <td @click="edit(todo, $event);" style="cursor:pointer;">编辑</td>
-            <td>{{todo}}</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-
-
+          <tr v-for="todo in apptList">
+            <td @click="edit(todo.orderId, $event);" style="cursor:pointer;">编辑</td>
+            <td>{{todo.orderId}}</td>
+            <td>{{todo.customerName}}</td>
+            <td>{{todo.customerMobile}}</td>
+            <td>{{todo.orderAddress}}</td>
+            <td>{{todo.orderTime}}</td>
           </tr>
+
+          <!-- <tr v-for="todo in listRes">
+            <td @click="edit(todo.userId, $event);" style="cursor:pointer;">编辑</td>
+            <td>{{todo.userId}}</td>
+
+
+            <td>{{todo.nickname}}</td>
+            <td>{{todo.mobile}}</td>
+            <td>{{todo.nativePlace}}</td>
+            <td>{{todo.startTime |calculateWorkTime}}</td>
+            <td>{{todo.workType}}</td>
+            <td>{{todo.foreman? "是" : "否"}}</td>
+            <td>{{todo.teamScale}}</td>
+            <td>{{todo.available? "接单中" : "不接单"}}</td> -->
 
         </table>
-        <div id="page">
-          <a href="#" class="pre"><img src="./img/first.png" alt="" /></a>
-          <a href="#" class="pre"><img src="./img/pre.png" alt="" /></a>
-          <a href="#"  class="pagenum">1</a>
-          <a href="#"  class="focus">2</a>
-          <a href="#"  class="focus">3</a>
-          ....
-          <a href="#"  class="focus">20</a>
-          <a href="#"  class="focus">21</a>
-          <a href="#"  class="focus">22</a>
-          <a href="#" class="pre"><img src="./img/next.png" alt="" /></a>
-          <a href="#" class="pre"><img src="./img/last.png" alt="" /></a>
-        </div>
+        <div id="page" >
+          <v-page :pePageThreshould="5" v-bind:peAllPageNumber="allPageNumber" :peCurrentPage="currentPage"  @changeCurrentPage="ccp"></v-page>
+      </div>
       </div>
     </right>
 </template>
 
 <script>
 import right from "components/right/right.vue";
+import vPage from "components/v-page/index.vue";
 export default {
   name: 'bookedOrder',
-  data () {
-    return {}
+  data() {
+    return {
+      apptList: {},
+      orderList: {},
+
+      form: {}, //把搜索的字段封装成数组
+      filterString: '', //把数组变成4字符串
+
+      allPageNumber: null, //总页数
+      currentPage: null, //当前页面
+      count: 0,
+
+      perSize: 20, //每页面显示的数据
+    }
   },
   computed: {},
-  mounted () {},
+  mounted() {
+    let that = this;
+    //服务器基本地址
+    var urlbase = this.$http.options.root;
+    //请求的URL
+    var resUrl = urlbase + '/decorationorder/api/admin/decorationOrders?page=0&size=' + this.perSize + '&sort=id,ASC&filter=status:[1,2]';
+    this.$http.get(resUrl).then(
+      (response) => {
+        //查询出服务器的数据
+        that.orderList = response.body.data;
+        //得到总页数
+        that.allPageNumber = response.body.meta.pageCount;
+        //获取当前页面 需要加一
+        that.currentPage = response.body.meta.currentPage + 1;
+        // this.currentPage = 3;
+        let list = [];
+        for (let i in that.orderList) {
+          list[i] = {};
+        }
+        that.count = 0;
+        // that.apptList = list;
+        for (let i in that.orderList) {
+          that.$http.get(urlbase + "/decorationorder/api/admin/decorationAppts/" + that.orderList[i].id).then(
+            (response) => {
+              list[i] = response.body.data;
+              that.count += 1;
+              if(that.count == list.length) {
+                  that.apptList = list;
+              }
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+        }
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  },
   methods: {
-    edit: function(id, event){
+    edit: function(id, event) {
       // this.activeName = sortment;
       //给目前的实例注册一个事件
       //alert(1);
-      var obj = {id: id, viewName: 'boEdit'};
+      var obj = {
+        id: id,
+        viewName: 'boEdit'
+      };
       this.$emit('jumpEdit', obj);
     },
+    ccp: function(value) {
+      //服务器基本地址
+      var urlbase = this.$http.options.root;
+      //当前的页数
+      var page = (value - 1).toString();
+      //请求的URL
+      //判断是否是查询还是正常显示
+      if (this.filterString) {
+        var resUrl = urlbase + '/decorationorder/api/admin/decorationAppts?page=' + page + '&size=' + this.perSize + '&sort=orderId,ASC' + this.filterString;
+      } else {
+        var resUrl = urlbase + '/decorationorder/api/admin/decorationAppts?page=' + page + '&size=' + this.perSize + '&sort=orderId,ASC';
+      }
+      this.$http.get(resUrl).then(
+        (response) => {
+          this.listRes = response.body.data;
+          // console.log(this.listRes);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+      //更改当前页面
+      this.currentPage = value;
+    }
   },
-  components:{
-    right
+  components: {
+    right,
+    vPage
   }
 }
 </script>

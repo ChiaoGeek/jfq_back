@@ -162,7 +162,7 @@ import commonJs from "src/common.js";
 // import inputCom from "components/input/input.vue";
 export default {
   name: 'hoEdit',
-  data () {
+  data() {
     return {
       listRes: {}, //服务器端查询的数据
 
@@ -178,41 +178,43 @@ export default {
   computed: {
 
   },
-  mounted () {
+  mounted() {
     //服务器基本地址
     var urlbase = this.$http.options.root;
     //请求的URL
-    var resUrl = urlbase+'/user/api/admin/workmanProfiles/'+this.itemPara;
+    var resUrl = urlbase + '/user/api/admin/workmanProfiles/' + this.itemPara;
 
     this.$http.get(resUrl).then(
-      (response)=>{
+      (response) => {
         //查询出服务器的数据
         this.listRes = response.body.data;
         //this.selected = this.listRes.available;
 
 
       },
-      (err)=>{
+      (err) => {
         console.log(err);
       }
     );
   },
   methods: {
-    cancel: function(componentName, event){
+    cancel: function(componentName, event) {
 
-       var obj = {componentName:componentName};
-       this.$emit('cancelEdit', obj);
+      var obj = {
+        componentName: componentName
+      };
+      this.$emit('cancelEdit', obj);
     },
-    save: function(){
+    save: function() {
 
 
       //服务器基本地址
       var urlbase = this.$http.options.root;
       //请求的URL
-      var resUrl = urlbase+'/user/api/admin/workmanProfiles/';
+      var resUrl = urlbase + '/user/api/admin/workmanProfiles/';
 
       this.$http.post(resUrl, this.listRes).then(
-        (response)=>{
+        (response) => {
           //查询出服务器的数据
           // console.log(response);
           //this.selected = this.listRes.available;
@@ -220,7 +222,7 @@ export default {
 
 
         },
-        (err)=>{
+        (err) => {
           console.log(err);
         }
       );
@@ -228,7 +230,7 @@ export default {
 
     },
   },
-  components:{
+  components: {
     right,
     // inputCom
   }

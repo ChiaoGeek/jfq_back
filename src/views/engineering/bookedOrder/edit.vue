@@ -1,5 +1,5 @@
 <template lang="html">
-  <right >
+  <right>
     <div id="right-up">
         <div id="right-up-blank"></div>
         <div id="right-up-text">
@@ -39,71 +39,81 @@
        <!-- <inputCom inputName='applyName'   inputWidth="120px" inputHeight="40px" ></inputCom> -->
        <div class="person-info">
           <div class="left">
-             <span class="label">姓名</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
+             <span class="label">姓名</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="right">
              <span class="label">房屋地址</span>
              <span class="input">
-               <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-             <span>
+               <input type="text" class="inputtext" name="name" v-model="appt.orderAddress" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="middle">
             <span class="label">电话</span>
             <span class="input">
-              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-            <span>
+              <input type="text" class="inputtext" name="name" v-model="appt.customerMobile" :style="{width: '180px', height: '40px'}">
+            </span>
           </div>
        </div>
 
        <div class="person-info margin-top">
           <div class="left">
-             <span class="label">工长一姓名</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
+             <span class="label">工长一姓名</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name" v-model="foreman1.nickname" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="right">
              <span class="label">工长二姓名</span>
              <span class="input">
-               <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-             <span>
+               <input type="text" class="inputtext" name="name" v-model="foreman2.nickname" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="middle">
             <span class="label">工长一电话</span>
             <span class="input">
-              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-            <span>
+              <input type="text" class="inputtext" name="name" v-model="foreman1.mobile" :style="{width: '180px', height: '40px'}">
+            </span>
           </div>
        </div>
 
        <div class="person-info margin-top">
           <div class="left">
-             <span class="label">工长二电话</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
+             <span class="label">工长二电话</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name" v-model="foreman2.mobile" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="right">
              <span class="label">管家</span>
 
              <span class="input">
-               <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-
-             <span>
+               <input type="text" class="inputtext" name="name" v-model="manager.nickname" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="middle">
             <span class="label">预约时间</span>
             <span class="input">
-              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-
-            <span>
+              <input type="text" class="inputtext" name="name" v-model="appt.orderTime" :style="{width: '180px', height: '40px'}">
+            </span>
           </div>
        </div>
 
        <div class="person-info margin-top">
           <div class="left">
-             <span class="label">工程管家</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
+             <span class="label">工程管家</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name" v-model="projectManager.nickname" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
 
           <div class="middle">
             <span class="label">订单创建时间</span>
-            <span class="input">
-              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-            <span>
+          <span class="input">
+            <input type="text" class="inputtext" name="name" v-model="appt.createdAt" :style="{width: '180px', height: '40px'}">
+          </span>
           </div>
        </div>
 
@@ -113,25 +123,98 @@
 
 <script>
 import right from "components/right/right.vue";
-import inputCom from "components/input/input.vue";
+// import inputCom from "components/input/input.vue";
+import commonJs from "src/common.js";
 export default {
   name: 'boEdit',
-  data () {
-    return {}
+  data() {
+    return {
+      appt: {}, //服务器端查询的数据
+      order: {},
+      manager: {},
+      projectManager: {},
+      foreman1: {},
+      foreman2: {},
+    }
   },
   props: ['itemPara'],
   computed: {},
-  mounted () {},
+  mounted() {
+    let that = this;
+    //服务器基本地址
+    var urlbase = this.$http.options.root;
+    //请求的URL
+    var resUrl = urlbase + '/decorationorder/api/admin/decorationAppts/' + this.itemPara;
+    this.$http.get(resUrl).then(
+      (response) => {
+        //查询出服务器的数据
+        that.appt = response.body.data;
+        // 订单
+        that.$http.get(urlbase + "/decorationorder/api/admin/decorationOrders/" + that.appt.orderId).then(
+          (response) => {
+            that.order = response.body.data;
+            // 管家
+            that.$http.get(urlbase + "/user/api/admin/managerProfiles/" + that.order.managerId).then(
+              (response) => {
+                that.manager = response.body.data;
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+            // 工程管家
+            that.$http.get(urlbase + "/user/api/admin/projectManagerProfiles/" + that.order.projectManagerId).then(
+              (response) => {
+                that.projectManager = response.body.data;
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+        // 工长1
+        if (that.appt.foreman1Id) {
+          that.$http.get(urlbase + "/user/api/admin/workmanProfiles/" + that.appt.foreman1Id).then(
+            (response) => {
+              that.foreman1 = response.body.data;
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+        }
+        // 工长2
+        if (that.appt.foreman2Id) {
+          that.$http.get(urlbase + "/user/api/admin/workmanProfiles/" + that.appt.foreman2Id).then(
+            (response) => {
+              that.foreman2 = response.body.data;
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+        }
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  },
   methods: {
-    cancel: function(componentName, event){
-
-       var obj = {componentName:componentName};
-       this.$emit('cancelEdit', obj);
+    cancel: function(componentName, event) {
+      var obj = {
+        componentName: componentName
+      };
+      this.$emit('cancelEdit', obj);
     }
   },
-  components:{
+  components: {
     right,
-    inputCom
+    // inputCom
   }
 }
 </script>
