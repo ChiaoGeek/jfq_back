@@ -3,10 +3,10 @@
     <div id="right-up">
         <div id="right-up-blank"></div>
         <div id="right-up-text">
-          {{nickname}}
+          {{listRes.nickname}}
         </div>
         <div id="right-up-icon">
-          <span class="rui-icon-text">
+          <span class="rui-icon-text" @click='save()'>
             <a href="#" class="rui-icon">
               <img src="../../../../static/img/save.png" alt="" />
             </a>
@@ -41,19 +41,19 @@
           <div class="left">
              <span class="label">姓名</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="nickname" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.nickname" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
           <div class="right">
              <span class="label">籍贯</span>
              <span class="input">
-                 <input type="text" class="inputtext" name="name" v-model="nativePlace" :style="{width: '180px', height: '40px'}">
+                 <input type="text" class="inputtext" name="name" v-model="listRes.nativePlace" :style="{width: '180px', height: '40px'}">
             </span>
           </div>
           <div class="middle">
             <span class="label">电话</span>
             <span class="input">
-              <input type="text" class="inputtext" name="name" v-model="mobile" :style="{width: '180px', height: '40px'}">
+              <input type="text" class="inputtext" name="name" v-model="listRes.mobile" :style="{width: '180px', height: '40px'}">
             </span>
           </div>
        </div>
@@ -62,14 +62,14 @@
           <div class="left">
              <span class="label">入职年限</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="startTime" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.startTime" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
 
           <div class="middle">
             <span class="label">监管经验</span>
             <span class="input">
-              <input type="text" class="inputtext" name="name" v-model="experience" :style="{width: '180px', height: '40px'}">
+              <input type="text" class="inputtext" name="name" v-model="listRes.experience" :style="{width: '180px', height: '40px'}">
             </span>
           </div>
        </div>
@@ -80,57 +80,63 @@
 
 <script>
 import right from "components/right/right.vue";
-import inputCom from "components/input/input.vue";
+import commonJs from "src/common.js";
+// import inputCom from "components/input/input.vue";
 export default {
   name: 'ehkmEdit',
-  data () {
+  data() {
     return {
-        listRes: {}, //服务器端查询的数据
-        //需要查询的字段
-        // nickname: '',
-
-        nickname: '',
-        nativePlace: '',
-        mobile: '',
-        startTime: '',
-        experience: '',
+      listRes: {}, //服务器端查询的数据
+      //需要查询的字段
+      // nickname: '',
     }
   },
   props: ['itemPara'],
   computed: {},
-  mounted () {
+  mounted() {
     //服务器基本地址
     var urlbase = this.$http.options.root;
     //请求的URL
-    var resUrl = urlbase+'/user/api/projectManagerProfiles?filter=userId:'+this.itemPara;
-
+    var resUrl = urlbase + '/user/api/admin/projectManagerProfiles/' + this.itemPara;
     this.$http.get(resUrl).then(
-      (response)=>{
+      (response) => {
         //查询出服务器的数据
         this.listRes = response.body.data;
-        this.nickname = this.listRes[0].nickname;
-        this.nativePlace = this.listRes[0].nativePlace;
-        this.mobile = this.listRes[0].mobile;
-        this.experience = this.listRes[0].experience;
       },
-      (err)=>{
+      (err) => {
         console.log(err);
       }
     );
   },
   methods: {
-    cancel: function(componentName, event){
+    cancel: function(componentName, event) {
 
-       var obj = {componentName:componentName};
-       this.$emit('cancelEdit', obj);
+      var obj = {
+        componentName: componentName
+      };
+      this.$emit('cancelEdit', obj);
     },
-    save: function(){
-      console.log(this.nickname);
+    save: function() {
+      //服务器基本地址
+      var urlbase = this.$http.options.root;
+      //请求的URL
+      var resUrl = urlbase + '/user/api/admin/projectManagerProfiles/';
+      this.$http.post(resUrl, this.listRes).then(
+        (response) => {
+          //查询出服务器的数据
+          console.log(response);
+          //this.selected = this.listRes.available;
+          commonJs.savaSuccess('数据保存成功！！！');
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     },
   },
-  components:{
+  components: {
     right,
-    inputCom
+    // inputCom
   }
 }
 </script>

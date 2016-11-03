@@ -86,7 +86,7 @@
           </tr>
 
           <tr v-for="todo in listRes">
-            <td @click="edit(todo, $event);" style="cursor:pointer;">编辑</td>
+            <td @click="edit(todo.userId, $event);" style="cursor:pointer;">编辑</td>
             <td>{{todo.userId}}</td>
             <td>{{todo.nickname}}</td>
             <td>{{todo.mobile}}</td>
@@ -135,7 +135,7 @@ export default {
     //服务器基本地址
     var urlbase = this.$http.options.root;
     //请求的URL
-    var resUrl = urlbase+'/user/api/projectManagerProfiles?page=0&size='+this.perSize+'&sort=userId,ASC';
+    var resUrl = urlbase+'/user/api/admin/projectManagerProfiles?page=0&size='+this.perSize+'&sort=userId,ASC';
 
     this.$http.get(resUrl).then(
       (response)=>{
