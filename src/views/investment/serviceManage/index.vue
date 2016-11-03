@@ -83,11 +83,11 @@
 
           </tr>
 
-          <tr v-for="todo in listRes">
+          <tr v-for="todo in lastRes">
             <td @click="edit(todo.userId, $event);" style="cursor:pointer;">编辑</td>
             <td>{{todo.userId}}</td>
-            <td>{{todo.nickname}}</td>
-            <td>&nbsp;</td>
+            <td>{{todo.nickname }}</td>
+            <td>{{todo.listRes2 | extractFiledsFromList  }}</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
 
@@ -108,7 +108,8 @@ export default {
   name: 'serviceManage',
   data () {
     return {
-      listRes: '', //服务器端查询的数据
+      listRes: [], //服务器端查询的数据
+      lastRes: [],
 
       //需要查询的字段
       nickname: '',
@@ -128,13 +129,36 @@ export default {
   mounted () {
     //服务器基本地址
     var urlbase = this.$http.options.root;
+
     //请求的URL
-    var resUrl = urlbase+'/user/api/serviceManagerProfiles?page=0&size='+this.perSize+'&sort=userId,ASC';
+    var resUrl = urlbase+'/user/api/admin/serviceManagerProfiles?page=0&size='+this.perSize+'&sort=userId,ASC';
 
     this.$http.get(resUrl).then(
       (response)=>{
         //查询出服务器的数据
         this.listRes = response.body.data;
+        /***
+        查询门店
+        ***/
+        var that = this;
+        var aggraRes = this.listRes.map(function(obj){//返回合并的结果
+
+          var resUrl2 = urlbase+'/merchant/api/stores?filter=userId:'+obj.userId;
+          that.$http.get(resUrl2).then(
+            (response)=>{
+              //查询出服务器的数据
+              obj.listRes2 = response.body.data;
+              that.lastRes.push(obj);
+            },
+            (err)=>{
+              console.log(err);
+            }
+          );
+        }
+      );
+
+
+
         //得到总页数
         this.allPageNumber = response.body.meta.pageCount;
         //获取当前页面 需要加一
@@ -145,6 +169,12 @@ export default {
         console.log(err);
       }
     );
+
+    //门店查询
+    //请求的URL
+
+
+
   },
   methods: {
     edit: function(id, event){
@@ -169,7 +199,7 @@ export default {
       //服务器基本地址
       var urlbase = this.$http.options.root;
       //请求的URL
-      var resUrl = urlbase+'/user/api/serviceManagerProfiles?page=0&size='+this.perSize+'&sort=userId,ASC&filter='+this.filterString;
+      var resUrl = urlbase+'/user/api/admin/serviceManagerProfiles?page=0&size='+this.perSize+'&sort=userId,ASC&filter='+this.filterString;
 
       this.$http.get(resUrl).then(
         (response)=>{
@@ -196,9 +226,9 @@ export default {
       //请求的URL
       //判断是否是查询还是正常显示
       if(this.filterString){
-        var resUrl = urlbase+'/user/api/serviceManagerProfiles?page='+page+'&size='+this.perSize+'&sort=userId,ASC&filter='+this.filterString;
+        var resUrl = urlbase+'/user/api/admin/serviceManagerProfiles?page='+page+'&size='+this.perSize+'&sort=userId,ASC&filter='+this.filterString;
       }else{
-        var resUrl = urlbase+'/user/api/serviceManagerProfiles?page='+page+'&size='+this.perSize+'&sort=userId,ASC';
+        var resUrl = urlbase+'/user/api/admin/serviceManagerProfiles?page='+page+'&size='+this.perSize+'&sort=userId,ASC';
       }
 
       this.$http.get(resUrl).then(

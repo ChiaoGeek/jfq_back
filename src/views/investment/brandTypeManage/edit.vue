@@ -69,7 +69,7 @@
 import right from "components/right/right.vue";
 import commonJs from "src/common.js";
 export default {
-  name: 'btmEdit',
+  name: 'naoEdit',
   data () {
     return {
       listRes: {}, //服务器端查询的数据

@@ -38,6 +38,14 @@ Vue.filter('TrueFalse', function (value, trueMsg) {//计算工龄
   // }
   return trueMsg;
 });
+Vue.filter('extractFiledsFromList', function (value) {//循环数组中的信息并将某字段内容提取出来
+  var nameList = value.map(function(list){
+     return list.name;
+
+  });
+  return nameList.join('\n');
+
+});
 
 new Vue({
   //Router

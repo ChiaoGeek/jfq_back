@@ -18,7 +18,7 @@
             <span class="span-blank"></span>
           </span>
 
-          <span class="rui-icon-text" @click='cancel("brandManage", $event)'>
+          <span class="rui-icon-text" @click='cancel("noActiveOrder", $event)'>
             <a href="#" class="rui-icon">
               <img src="../../../../static/img/cancel.png" alt="" />
             </a>

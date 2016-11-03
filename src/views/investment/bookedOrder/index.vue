@@ -66,7 +66,7 @@
             </form>
           </div>
           <div id="rfc-search">
-              <img src="./img/search.png" alt="" />
+              <!-- <img src="./img/search.png" alt="" /> -->
           </div>
 
       </div>

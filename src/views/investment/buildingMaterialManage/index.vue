@@ -60,13 +60,13 @@
 
           </div>
           <div id="right-form-content">
-            <form class="" action="index.html" method="post">
+            <!-- <form class="" action="index.html" method="post">
               <input type="text" name="name" value="" class="rfc-input" placeholder="申请人姓名">
               <input type="text" name="name" value="" class="rfc-input" placeholder="申请人电话">
-            </form>
+            </form> -->
           </div>
           <div id="rfc-search">
-              <img src="./img/search.png" alt="" />
+              <!-- <img src="./img/search.png" alt="" /> -->
           </div>
 
       </div>
@@ -82,42 +82,67 @@
 
           </tr>
 
-          <tr v-for="todo in (1,20)">
-            <td @click="edit(todo, $event);" style="cursor:pointer;">编辑</td>
-            <td>{{todo}}</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          
+          <tr v-for="todo in listRes">
+            <td @click="edit(todo.id, $event);" style="cursor:pointer;">编辑</td>
+            <td>{{todo.id}}</td>
+            <td>{{todo.name}}</td>
+            <td>{{todo.address}}</td>
+
 
           </tr>
 
         </table>
-        <div id="page">
-          <a href="#" class="pre"><img src="./img/first.png" alt="" /></a>
-          <a href="#" class="pre"><img src="./img/pre.png" alt="" /></a>
-          <a href="#"  class="pagenum">1</a>
-          <a href="#"  class="focus">2</a>
-          <a href="#"  class="focus">3</a>
-          ....
-          <a href="#"  class="focus">20</a>
-          <a href="#"  class="focus">21</a>
-          <a href="#"  class="focus">22</a>
-          <a href="#" class="pre"><img src="./img/next.png" alt="" /></a>
-          <a href="#" class="pre"><img src="./img/last.png" alt="" /></a>
-        </div>
+        <div id="page" >
+          <v-page :pePageThreshould="5" v-bind:peAllPageNumber="allPageNumber" :peCurrentPage="currentPage"  @changeCurrentPage="ccp"></v-page>
+      </div>
       </div>
     </right>
 </template>
 
 <script>
 import right from "components/right/right.vue";
+import vPage from "components/v-page/index.vue";
 export default {
   name: 'buildingMaterialManage',
   data () {
-    return {}
+    return {
+      listRes: '', //服务器端查询的数据
+
+
+
+
+      form: {}, //把搜索的字段封装成数组
+      filterString: '',  //把数组变成4字符串
+
+      allPageNumber: null,  //总页数
+      currentPage: null,    //当前页面
+
+      perSize: 20,   //每页面显示的数据
+
+    }
   },
   computed: {},
-  mounted () {},
+  mounted () {
+    //服务器基本地址
+    var urlbase = this.$http.options.root;
+    //请求的URL
+    var resUrl = urlbase+'/merchant/api/material-cities?page=0&size='+this.perSize+'&sort=id,ASC';
+
+    this.$http.get(resUrl).then(
+      (response)=>{
+        //查询出服务器的数据
+        this.listRes = response.body.data;
+        //得到总页数
+        this.allPageNumber = response.body.meta.pageCount;
+        //获取当前页面 需要加一
+        this.currentPage = response.body.meta.currentPage + 1;
+        // this.currentPage = 3;
+      },
+      (err)=>{
+        console.log(err);
+      }
+    );
+  },
   methods: {
     edit: function(id, event){
       // this.activeName = sortment;
@@ -126,9 +151,38 @@ export default {
       var obj = {id: id, viewName: 'bmmEdit'};
       this.$emit('jumpEdit', obj);
     },
+    ccp: function(value){
+      //服务器基本地址
+      var urlbase = this.$http.options.root;
+
+      //当前的页数
+      var page = (value - 1).toString();
+
+      //请求的URL
+      //判断是否是查询还是正常显示
+      if(this.filterString){
+        var resUrl = urlbase+'/merchant/api/material-cities?page='+page+'&size='+this.perSize+'&sort=id,ASC&filter='+this.filterString;
+      }else{
+        var resUrl = urlbase+'/merchant/api/material-cities?page='+page+'&size='+this.perSize+'&sort=id,ASC';
+      }
+
+      this.$http.get(resUrl).then(
+        (response)=>{
+
+          this.listRes = response.body.data;
+          // console.log(this.listRes);
+        },
+        (err)=>{
+          console.log(err);
+        }
+      );
+      //更改当前页面
+      this.currentPage = value;
+    }
   },
   components:{
-    right
+    right,
+    vPage
   }
 }
 </script>
