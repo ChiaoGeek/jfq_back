@@ -92,21 +92,6 @@
             <td>{{todo.orderAddress}}</td>
             <td>{{todo.orderTime}}</td>
           </tr>
-
-          <!-- <tr v-for="todo in listRes">
-            <td @click="edit(todo.userId, $event);" style="cursor:pointer;">编辑</td>
-            <td>{{todo.userId}}</td>
-
-
-            <td>{{todo.nickname}}</td>
-            <td>{{todo.mobile}}</td>
-            <td>{{todo.nativePlace}}</td>
-            <td>{{todo.startTime |calculateWorkTime}}</td>
-            <td>{{todo.workType}}</td>
-            <td>{{todo.foreman? "是" : "否"}}</td>
-            <td>{{todo.teamScale}}</td>
-            <td>{{todo.available? "接单中" : "不接单"}}</td> -->
-
         </table>
         <div id="page" >
           <v-page :pePageThreshould="5" v-bind:peAllPageNumber="allPageNumber" :peCurrentPage="currentPage"  @changeCurrentPage="ccp"></v-page>
@@ -141,7 +126,7 @@ export default {
     //服务器基本地址
     var urlbase = this.$http.options.root;
     //请求的URL
-    var resUrl = urlbase + '/decorationorder/api/admin/decorationOrders?page=0&size=' + this.perSize + '&sort=id,ASC&filter=status:[1,2]';
+    var resUrl = urlbase + '/decorationorder/api/admin/decorationOrders?page=0&size=' + this.perSize + '&sort=id,ASC&filter=status:[1,3]';
     this.$http.get(resUrl).then(
       (response) => {
         //查询出服务器的数据
@@ -196,14 +181,33 @@ export default {
       //请求的URL
       //判断是否是查询还是正常显示
       if (this.filterString) {
-        var resUrl = urlbase + '/decorationorder/api/admin/decorationAppts?page=' + page + '&size=' + this.perSize + '&sort=orderId,ASC' + this.filterString;
+        var resUrl = urlbase + '/decorationorder/api/admin/decorationOrders?page=' + page + '&size=' + this.perSize + '&sort=id,ASC&filter=status:[1,3]|' + this.filterString;
       } else {
-        var resUrl = urlbase + '/decorationorder/api/admin/decorationAppts?page=' + page + '&size=' + this.perSize + '&sort=orderId,ASC';
+        var resUrl = urlbase + '/decorationorder/api/admin/decorationOrders?page=' + page + '&size=' + this.perSize + '&sort=id,ASC&filter=status:[1,3]';
       }
+      let that = this;
       this.$http.get(resUrl).then(
         (response) => {
-          this.listRes = response.body.data;
-          // console.log(this.listRes);
+          let list = [];
+          for (let i in that.orderList) {
+            list[i] = {};
+          }
+          that.count = 0;
+          // that.apptList = list;
+          for (let i in that.orderList) {
+            that.$http.get(urlbase + "/decorationorder/api/admin/decorationAppts/" + that.orderList[i].id).then(
+              (response) => {
+                list[i] = response.body.data;
+                that.count += 1;
+                if(that.count == list.length) {
+                    that.apptList = list;
+                }
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+          }
         },
         (err) => {
           console.log(err);
