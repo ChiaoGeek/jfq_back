@@ -6,7 +6,7 @@
           {{itemPara}}
         </div>
         <div id="right-up-icon">
-          <span class="rui-icon-text">
+          <span class="rui-icon-text" @click='save()'>
             <a href="#" class="rui-icon">
               <img src="../../../../static/img/save.png" alt="" />
             </a>
@@ -18,7 +18,7 @@
             <span class="span-blank"></span>
           </span>
 
-          <span class="rui-icon-text" @click='cancel("noActiveOrder", $event)'>
+          <span class="rui-icon-text" @click='cancel("storeManage", $event)'>
             <a href="#" class="rui-icon">
               <img src="../../../../static/img/cancel.png" alt="" />
             </a>
@@ -39,106 +39,92 @@
        <!-- <inputCom inputName='applyName'   inputWidth="120px" inputHeight="40px" ></inputCom> -->
        <div class="person-info">
           <div class="left">
-             <span class="label">名称</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
+             <span class="label">名称</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name" v-model="listRes.name" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="right">
              <span class="label">电话</span>
              <span class="input">
-               <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-             <span>
+               <input type="text" class="inputtext" name="name" v-model="listRes.phone" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="middle">
             <span class="label">地址</span>
             <span class="input">
-              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-            <span>
+              <input type="text" class="inputtext" name="name" v-model="listRes.address" :style="{width: '180px', height: '40px'}">
+            </span>
           </div>
        </div>
 
        <div class="person-info margin-top">
           <div class="left">
-             <span class="label">建材城</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
+             <span class="label">建材城</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name" v-model="listRes.materialCity" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="right">
              <span class="label">品牌</span>
              <span class="input">
-               <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-             <span>
+               <input type="text" class="inputtext" name="name" v-model="listRes.brands" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="middle">
             <span class="label">佣金</span>
             <span class="input">
-              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-            <span>
+              <input type="text" class="inputtext" name="name" v-model="listRes.rebateScale" :style="{width: '180px', height: '40px'}">
+            </span>
           </div>
        </div>
 
        <div class="person-info margin-top">
           <div class="left">
-             <span class="label">账号</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
+             <span class="label">账号</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name"  :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="right">
-             <span class="label">订单状态</span>
+             <span class="label">状态</span>
              <span class="input">
                <!-- <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom> -->
-               &nbsp;&nbsp;
-               <select class="select">
-                 <option  value="volvo">&nbsp;&nbsp;&nbsp;&nbsp;请选择</option>
-                 <option  value="mercedes">&nbsp;&nbsp;&nbsp;&nbsp;Mercedes</option>
-                 <option  value="audi">&nbsp;&nbsp;&nbsp;&nbsp;Audi</option>
+               <select class="select" v-model="listRes.opened">
+                 <option  v-bind:value="true" >&nbsp;&nbsp;&nbsp;&nbsp;接单</option>
+                 <option  v-bind:value="false">&nbsp;&nbsp;&nbsp;&nbsp;不接单</option>
                </select>
-             <span>
+             </span>
           </div>
           <div class="middle">
             <span class="label">密码修改</span>
             <span class="input">
-              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-            <span>
+              <input type="text" class="inputtext" name="name"  :style="{width: '180px', height: '40px'}">
+            </span>
           </div>
        </div>
 
        <div class="person-info margin-top">
           <div class="left">
-             <span class="label">业务经理</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
+             <span class="label">业务经理</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name" v-model="listRes.serviceManagers" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="right">
              <span class="label">收款账号</span>
              <span class="input">
-               <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-
-             <span>
+               <input type="text" class="inputtext" name="name" v-model="listRes.bankAccount" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="middle">
             <span class="label">负责人</span>
             <span class="input">
-              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-            <span>
+              <input type="text" class="inputtext" name="name" v-model="listRes.chargeName" :style="{width: '180px', height: '40px'}">
+            </span>
           </div>
        </div>
 
-       <div class="person-info margin-top">
-          <div class="left">
-             <span class="label">反馈结果</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
-          </div>
-          <div class="right">
-             <span class="label">订单状态</span>
-             <span class="input">
-               <!-- <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom> -->
-               &nbsp;&nbsp;
-               <select class="select">
-                 <option  value="volvo">&nbsp;&nbsp;&nbsp;&nbsp;请选择</option>
-                 <option  value="mercedes">&nbsp;&nbsp;&nbsp;&nbsp;Mercedes</option>
-                 <option  value="audi">&nbsp;&nbsp;&nbsp;&nbsp;Audi</option>
-               </select>
-             <span>
-          </div>
-          <div class="middle">
-            <span class="label">订单创建时间</span>
-            <span class="input">
-              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-            <span>
-          </div>
-       </div>
 
     </div>
   </right>
@@ -146,25 +132,82 @@
 
 <script>
 import right from "components/right/right.vue";
-import inputCom from "components/input/input.vue";
+import commonJs from "src/common.js";
 export default {
   name: 'storemEdit',
   data () {
-    return {}
+    return {
+      listRes: {}, //服务器端查询的数据
+
+      selected: '',
+
+    }
   },
   props: ['itemPara'],
-  computed: {},
-  mounted () {},
+  computed: {
+    openedStatus(){
+      if('opened' in this.listRes){
+        return this.listRes.opened;
+      }else{
+        return '';
+      }
+    }
+  },
+  mounted () {
+    //服务器基本地址
+    var urlbase = this.$http.options.root;
+    //请求的URL
+    var resUrl = urlbase + '/merchant/api/stores/' + this.itemPara;
+
+    this.$http.get(resUrl).then(
+      (response) => {
+        //查询出服务器的数据
+        this.listRes = response.body.data;
+
+        //this.selected = this.listRes.available;
+
+
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  },
   methods: {
     cancel: function(componentName, event){
 
        var obj = {componentName:componentName};
        this.$emit('cancelEdit', obj);
-    }
+    },
+    save: function() {
+
+
+      //服务器基本地址
+      var urlbase = this.$http.options.root;
+      //请求的URL
+      var resUrl = urlbase + '/merchant/api/stores/';
+      console.log("test");
+      console.log(this.listRes);
+      this.$http.put(resUrl, this.listRes).then(
+        (response) => {
+          //查询出服务器的数据
+          // console.log(response);
+          //this.selected = this.listRes.available;
+          commonJs.savaSuccess('数据保存成功！！！');
+
+
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+
+
+    },
   },
   components:{
     right,
-    inputCom
+    // inputCom
   }
 }
 </script>
@@ -274,6 +317,19 @@ export default {
   display: block;
   margin-left: 10px;
 }
+.inputtext{
+  border: 1px solid rgb(86, 142, 194);
+  width: 150px;
+  height: 40px;
+  color: #393939;
+  font-size: 18px;
+  line-height: 40px;
+  text-align: left;
+  font-family: PingFangSC-Regular;
+  border-radius: 4.5px;	/* relative value */
+  -moz-border-radius: 4.5px;
+  -webkit-border-radius: 4.5px;
+}
 .select{
   width: 180px;
   height: 40px;
@@ -300,7 +356,6 @@ export default {
     width: 30%;
 
     margin-left: 35%;
-
 
 }
 

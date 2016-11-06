@@ -60,10 +60,7 @@
 
           </div>
           <div id="right-form-content">
-            <form class="" action="index.html" method="post">
-              <input type="text" name="name" class="rfc-input" placeholder="名称" v-model='name' @blur="search">
-              <input type="text" name="name" class="rfc-input" placeholder="电话" v-model='phone' @blur="search">
-            </form>
+
           </div>
           <div id="rfc-search">
               <!-- <img src="./img/search.png" alt="" /> -->

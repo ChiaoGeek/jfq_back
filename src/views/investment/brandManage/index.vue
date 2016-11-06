@@ -79,9 +79,9 @@
           <tr>
             <th width="40px">&nbsp;</th>
             <th width="48px">ID</th>
-            <th>品牌</th>
+            <th width="248px">品牌</th>
 
-            <th>品牌类型</th>
+
             <th>描述</th>
 
 
@@ -92,7 +92,7 @@
             <td>{{todo.id}}</td>
             <td>{{todo.name}}</td>
 
-            <td>&nbsp;</td>
+
             <td>{{todo.intro}}</td>
 
 
@@ -140,6 +140,7 @@ export default {
       (response)=>{
         //查询出服务器的数据
         this.listRes = response.body.data;
+
         //得到总页数
         this.allPageNumber = response.body.meta.pageCount;
         //获取当前页面 需要加一

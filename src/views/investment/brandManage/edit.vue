@@ -47,8 +47,13 @@
           <div class="middle">
              <span class="label">品牌类型</span>
              <span class="input">
-               <!-- <input type="text" class="inputtext" name="name" v-model="listRes.name" :style="{width: '180px', height: '40px'}"> -->
-             </span>
+               <!-- <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom> -->
+
+               <select class="select" v-model="categoriesName">
+                 <!-- <option v-for="todo in listRes2" :value="todo.name" >&nbsp;&nbsp;&nbsp;&nbsp;{{todo.name}}</option> -->
+                 <option  :value="categoriesName" >&nbsp;&nbsp;&nbsp;&nbsp;{{categoriesName}}</option>
+               </select>
+             <span>
           </div>
 
        </div>
@@ -92,6 +97,10 @@ import commonJs from "src/common.js";export default {
     return {
       listRes: {}, //服务器端查询的数据
 
+      listRes2: {}, //品牌类型数据
+
+      categoriesName: '', //品牌类型选择
+
       //需要显示
       // name: '',
       logoImg: '',
@@ -107,7 +116,17 @@ import commonJs from "src/common.js";export default {
     }
   },
   props: ['itemPara'],
-  computed: {},
+  computed: {
+    categoriesName(){
+      if('categories' in this.listRes){
+          return this.listRes.categories[0].name;
+      }else {
+          console.log(this.listRes);
+          return '';
+      }
+
+    },
+  },
   mounted () {
     //服务器基本地址
     var urlbase = this.$http.options.root;
@@ -122,12 +141,32 @@ import commonJs from "src/common.js";export default {
         this.logoImg = this.listRes.logoImg;
         //this.selected = this.listRes.available;
 
+        // this.categoriesName = this.listRes.categories[0].name;
+
+
+
 
       },
       (err)=>{
         console.log(err);
       }
     );
+    //获取品牌类型
+    //服务器基本地址
+    var urlbase2 = this.$http.options.root;
+    //请求的URL
+    var resUrl2 = urlbase2+'/merchant/api/categories?&sort=id,ASC';
+    this.$http.get(resUrl2).then(
+      (response)=>{
+        //查询出服务器的数据
+        this.listRes2 = response.body.data;
+
+      },
+      (err)=>{
+        console.log(err);
+      }
+    );
+
   },
   methods: {
     cancel: function(componentName, event){
@@ -138,6 +177,7 @@ import commonJs from "src/common.js";export default {
     save: function(){
       var urlbase = this.$http.options.root;
       var resUrl = urlbase+'/merchant/api/brands/';
+      this.listRes.categories[0].name = this.categoriesName;
       this.$http.put(resUrl, this.listRes).then(
         (response)=>{
           //查询出服务器的数据

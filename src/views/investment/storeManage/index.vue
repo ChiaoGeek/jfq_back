@@ -61,8 +61,8 @@
           </div>
           <div id="right-form-content">
             <form class="" action="index.html" method="post">
-              <input type="text" name="name" value="" class="rfc-input" placeholder="申请人姓名">
-              <input type="text" name="name" value="" class="rfc-input" placeholder="申请人电话">
+              <input type="text" name="name" class="rfc-input" placeholder="品牌" v-model='name' @blur="search">
+              <!-- <input type="text" name="name" value="" class="rfc-input" placeholder="申请人电话"> -->
             </form>
           </div>
           <div id="rfc-search">
@@ -79,9 +79,9 @@
             <th>名称</th>
             <th>地址</th>
             <th>电话</th>
-            <th>建材城</th>
+
             <th>佣金</th>
-            <th>品牌</th>
+
             <th>状态</th>
             <th>负责人</th>
 
@@ -93,9 +93,9 @@
             <td>{{todo.name}}</td>
             <td>{{todo.address}}</td>
             <td>{{todo.phone}}</td>
-            <td>{{todo.materialCity}}</td>
+
             <td>{{todo.rebateScale}}</td>
-            <td>{{todo.brands}}</td>
+
             <td>{{todo.opened ? '营业' : '不营业'}}</td>
             <td>{{todo.chargeName}}</td>
 

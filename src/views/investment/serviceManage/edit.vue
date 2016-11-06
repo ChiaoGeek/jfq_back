@@ -3,10 +3,10 @@
     <div id="right-up">
         <div id="right-up-blank"></div>
         <div id="right-up-text">
-          {{name}}
+          {{listRes.nickname}}
         </div>
         <div id="right-up-icon">
-          <span class="rui-icon-text">
+          <span class="rui-icon-text" @click='save()'>
             <a href="#" class="rui-icon">
               <img src="../../../../static/img/save.png" alt="" />
             </a>
@@ -41,7 +41,7 @@
           <div class="left">
              <span class="label">姓名</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="nickname" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.nickname" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
           <div class="right">
@@ -74,15 +74,14 @@
 
 <script>
 import right from "components/right/right.vue";
-// import inputCom from "components/input/input.vue";
+import commonJs from "src/common.js";
 export default {
   name: 'smEdit',
   data () {
     return {
       listRes: {}, //服务器端查询的数据
 
-      //需要显示
-      nickname: '',
+
     }
   },
   props: ['itemPara'],
@@ -91,28 +90,12 @@ export default {
     //服务器基本地址
     var urlbase = this.$http.options.root;
     //请求的URL
-    var resUrl = urlbase+'/user/api/serviceManagerProfiles?filter=userId:'+this.itemPara;
+    var resUrl = urlbase+'/user/api/admin/serviceManagerProfiles/'+this.itemPara;
 
     this.$http.get(resUrl).then(
       (response)=>{
         //查询出服务器的数据
         this.listRes = response.body.data;
-        this.nickname = this.listRes[0].nickname;
-        this.nativePlace = this.listRes[0].nativePlace;
-        this.mobile = this.listRes[0].mobile;
-        this.politicalStatus = this.listRes[0].politicalStatus;
-        this.startTime = this.listRes[0].startTime;
-        this.workType = this.listRes[0].workType;
-        this.foreman = this.listRes[0].foreman ? '是' : '否';
-        this.teamScale = this.listRes[0].teamScale;
-        // this.location = this.listRes[0].nickname;//暂无
-        this.experience = this.listRes[0].experience;
-        this.available = this.listRes[0].available;
-        this.neighbourhood = this.listRes[0].neighbourhood;
-        this.foremanRebate = this.listRes[0].foremanRebate;
-        this.bankcardNo = this.listRes[0].bankcardNo;
-        this.foremanId = this.listRes[0].foremanId;
-
       },
       (err)=>{
         console.log(err);
@@ -125,8 +108,28 @@ export default {
        var obj = {componentName:componentName};
        this.$emit('cancelEdit', obj);
     },
-    save: function(){
-      console.log(this.nickname);
+    save: function() {
+
+
+      //服务器基本地址
+      var urlbase = this.$http.options.root;
+      //请求的URL
+      var resUrl = urlbase + '/user/api/admin/serviceManagerProfiles/';
+
+      this.$http.post(resUrl, this.listRes).then(
+        (response) => {
+          //查询出服务器的数据
+          
+          commonJs.savaSuccess('数据保存成功！！！');
+
+
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+
+
     },
   },
   components:{
