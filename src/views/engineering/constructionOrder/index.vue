@@ -1,5 +1,5 @@
 <template lang="html">
-    <right>
+    <right >
       <div id="right-up">
           <div id="right-up-blank"></div>
           <div id="right-up-icon">
@@ -59,7 +59,14 @@
           <div id="right-form-blank">
 
           </div>
-
+          <div id="right-form-content">
+            <form class="" action="index.html" method="post">
+              <input type="text" name="name" value="" class="rfc-input" placeholder="申请人姓名">
+              <input type="text" name="name" value="" class="rfc-input" placeholder="申请人电话">
+              <input type="text" name="name" value="" class="rfc-input" placeholder="激活人姓名">
+              <input type="text" name="name" value="" class="rfc-input" placeholder="激活人电话">
+            </form>
+          </div>
           <div id="rfc-search">
               <img src="./img/search.png" alt="" />
           </div>
@@ -71,22 +78,29 @@
           <tr>
             <th width="40px">&nbsp;</th>
             <th width="48px">ID</th>
-
             <th>姓名</th>
+            <th>电话</th>
             <th>房屋地址</th>
+            <th>工长姓名</th>
+            <th>工长电话</th>
+            <th>管家</th>
+            <th>工程管家</th>
+            <th>订单创建时间</th>
             <th>订单金额</th>
-            <th>方案说明</th>
           </tr>
-
           <tr v-for="todo in apptList">
-            <td @click="edit(todo.appt.orderId, $event);" style="cursor:pointer;">编辑</td>
-            <td>{{todo.appt.orderId}}</td>
-            <td>{{todo.appt.customerName}}</td>
-            <td>{{todo.appt.orderAddress}}</td>
-            <td>{{todo.plan.price}}</td>
-            <td>{{todo.plan.description}}</td>
+            <td @click="edit(todo.orderId, $event);" style="cursor:pointer;">编辑</td>
+            <td>{{todo.orderId}}</td>
+            <td>{{todo.customerName}}</td>
+            <td>{{todo.customerMobile}}</td>
+            <td>{{todo.orderAddress}}</td>
+            <td>{{todo.orderTime}}</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
           </tr>
-
         </table>
         <div id="page" >
           <v-page :pePageThreshould="5" v-bind:peAllPageNumber="allPageNumber" :peCurrentPage="currentPage"  @changeCurrentPage="ccp"></v-page>
@@ -99,11 +113,10 @@
 import right from "components/right/right.vue";
 import vPage from "components/v-page/index.vue";
 export default {
-  name: 'constructionOrder',
+  name: 'bookedOrder',
   data() {
     return {
       apptList: {},
-      planList: {},
       orderList: {},
 
       form: {}, //把搜索的字段封装成数组
@@ -122,7 +135,7 @@ export default {
     //服务器基本地址
     var urlbase = this.$http.options.root;
     //请求的URL
-    var resUrl = urlbase + '/decorationorder/api/admin/decorationOrders?page=0&size=' + this.perSize + '&sort=id,ASC&filter=status:[4,7]';
+    var resUrl = urlbase + '/decorationorder/api/admin/decorationOrders?page=0&size=' + this.perSize + '&sort=id,ASC&filter=status:[1,3]';
     this.$http.get(resUrl).then(
       (response) => {
         //查询出服务器的数据
@@ -139,26 +152,12 @@ export default {
         that.count = 0;
         // that.apptList = list;
         for (let i in that.orderList) {
-          // 预约
           that.$http.get(urlbase + "/decorationorder/api/admin/decorationAppts/" + that.orderList[i].id).then(
             (response) => {
-              list[i].appt = response.body.data;
+              list[i] = response.body.data;
               that.count += 1;
-              if (that.count == 2 * list.length) {
-                that.apptList = list;
-              }
-            },
-            (err) => {
-              console.log(err);
-            }
-          );
-          // 装修方案
-          that.$http.get(urlbase + "/decorationorder/api/admin/decorationPlans/" + that.orderList[i].planId).then(
-            (response) => {
-              list[i].plan = response.body.data;
-              that.count += 1;
-              if (that.count == 2 * list.length) {
-                that.apptList = list;
+              if(that.count == list.length) {
+                  that.apptList = list;
               }
             },
             (err) => {
@@ -179,7 +178,7 @@ export default {
       //alert(1);
       var obj = {
         id: id,
-        viewName: 'coEdit'
+        viewName: 'boEdit'
       };
       this.$emit('jumpEdit', obj);
     },
@@ -191,24 +190,13 @@ export default {
       //请求的URL
       //判断是否是查询还是正常显示
       if (this.filterString) {
-        var resUrl = urlbase + '/decorationorder/api/admin/decorationOrders?page=' + page + '&size=' + this.perSize + '&sort=id,ASC&filter=status:[4,7]|' + this.filterString;
+        var resUrl = urlbase + '/decorationorder/api/admin/decorationOrders?page=' + page + '&size=' + this.perSize + '&sort=id,ASC&filter=status:[1,3]|' + this.filterString;
       } else {
-        var resUrl = urlbase + '/decorationorder/api/admin/decorationOrders?page=' + page + '&size=' + this.perSize + '&sort=id,ASC&filter=status:[4,7]';
+        var resUrl = urlbase + '/decorationorder/api/admin/decorationOrders?page=' + page + '&size=' + this.perSize + '&sort=id,ASC&filter=status:[1,3]';
       }
       let that = this;
-      //服务器基本地址
-      var urlbase = this.$http.options.root;
-      //请求的URL
-      var resUrl = urlbase + '/decorationorder/api/admin/decorationOrders?page=0&size=' + this.perSize + '&sort=id,ASC&filter=status:[4,7]';
       this.$http.get(resUrl).then(
         (response) => {
-          //查询出服务器的数据
-          that.orderList = response.body.data;
-          //得到总页数
-          that.allPageNumber = response.body.meta.pageCount;
-          //获取当前页面 需要加一
-          that.currentPage = response.body.meta.currentPage + 1;
-          // this.currentPage = 3;
           let list = [];
           for (let i in that.orderList) {
             list[i] = {};
@@ -216,26 +204,12 @@ export default {
           that.count = 0;
           // that.apptList = list;
           for (let i in that.orderList) {
-            // 预约
             that.$http.get(urlbase + "/decorationorder/api/admin/decorationAppts/" + that.orderList[i].id).then(
               (response) => {
-                list[i].appt = response.body.data;
+                list[i] = response.body.data;
                 that.count += 1;
-                if (that.count == 2 * list.length) {
-                  that.apptList = list;
-                }
-              },
-              (err) => {
-                console.log(err);
-              }
-            );
-            // 装修方案
-            that.$http.get(urlbase + "/decorationorder/api/admin/decorationPlans/" + that.orderList[i].planId).then(
-              (response) => {
-                list[i].plan = response.body.data;
-                that.count += 1;
-                if (that.count == 2 * list.length) {
-                  that.apptList = list;
+                if(that.count == list.length) {
+                    that.apptList = list;
                 }
               },
               (err) => {

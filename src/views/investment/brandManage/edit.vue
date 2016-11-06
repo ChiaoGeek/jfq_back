@@ -53,11 +53,14 @@
 
        </div>
 
-       <div class="person-info margin-top">
-          <div class="left">
-             <span class="label">描述</span>
-             <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="listRes.intro" :style="{width: '180px', height: '40px'}">
+       <div class="textarea">
+          <div class="textarea-left">
+             <span class="textarea-label">描述</span>
+             <span class="textarea-input">
+               <!-- <input type="text" class="inputtext" name="name" v-model="listRes.intro" :style="{width: '180px', height: '40px'}"> -->
+               <textarea  v-model="listRes.intro" :style="{width: '670px', height: '180px'}" class="textarea-inputtext">
+
+               </textarea>
              </span>
           </div>
 
@@ -376,5 +379,49 @@ import commonJs from "src/common.js";export default {
     -moz-border-radius: 4.5px;
     -webkit-border-radius: 4.5px;
   }
+
+.textarea{
+  width: 96%;
+  margin: auto;
+  height: 180px;
+  margin-top: 20px;
+}
+.textarea-left{
+  width: 100%;
+  float: left;
+}
+.textarea-label{
+  color: #393939;
+  font-size: 16px;
+  font-family: PingFangSC-Regular;
+  letter-spacing: 1px;
+  display: block;
+  float: left;
+  width: 105px;
+  line-height: 180px;
+  text-align: right;
+}
+.textarea-input{
+  float: left;
+  display: block;
+  margin-left: 10px;
+}
+.textarea-inputtext{
+  border: 1px solid rgb(86, 142, 194);
+
+
+  color: #393939;
+  font-size: 18px;
+  line-height: 40px;
+  text-align: left;
+  font-family: PingFangSC-Regular;
+  border-radius: 4.5px;	/* relative value */
+  -moz-border-radius: 4.5px;
+  -webkit-border-radius: 4.5px;
+}
+
+
+
+
 
 </style>

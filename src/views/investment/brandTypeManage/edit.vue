@@ -129,7 +129,7 @@ export default {
       this.$http.put(resUrl, this.listRes).then(
         (response)=>{
           //查询出服务器的数据
-           commonJs.savaSuccess();
+           commonJs.savaSuccess('数据保存成功！！！');
 
         },
         (err)=>{

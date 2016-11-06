@@ -63,6 +63,8 @@
             <form class="" action="index.html" method="post">
               <input type="text" name="name" value="" class="rfc-input" placeholder="申请人姓名">
               <input type="text" name="name" value="" class="rfc-input" placeholder="申请人电话">
+              <input type="text" name="name" value="" class="rfc-input" placeholder="激活人姓名">
+              <input type="text" name="name" value="" class="rfc-input" placeholder="激活人电话">
             </form>
           </div>
           <div id="rfc-search">
@@ -78,7 +80,7 @@
             <th width="48px">ID</th>
             <th>申请人姓名</th>
             <th>申请人电话</th>
-            <th>地区</th>
+            <th>地区（省市区）</th>
             <th>详细地址</th>
             <th>房屋面积</th>
             <th>期望额度</th>
@@ -88,20 +90,20 @@
             <th>订单状态</th>
 
           </tr>
-
           <tr v-for="todo in listRes">
             <td @click="edit(todo.id, $event);" style="cursor:pointer;">编辑</td>
             <td>{{todo.id}}</td>
-            <td>{{todo.fullname}}</td>
-            <td>{{todo.mobile}}</td>
-            <td>{{todo.province}}</td>
-            <td>{{todo.address}}</td>
-            <td>{{todo.houseArea}}</td>
-            <td>{{todo.expectQuota}}</td>
-            <td>{{todo.expectInstalment}}</td>
-            <td>{{todo.isIncumbent}}</td>
-            <td>{{todo.monthlyIncome}}</td>
-            <td>{{todo.status}}</td>
+            <td>{{todo.name}}</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+
 
 
           </tr>
@@ -118,7 +120,7 @@
 import right from "components/right/right.vue";
 import vPage from "components/v-page/index.vue";
 export default {
-  name: 'noActiveOrder',
+  name: 'decorationOrder',
   data () {
     return {
       listRes: '', //服务器端查询的数据
@@ -141,7 +143,7 @@ export default {
     //服务器基本地址
     var urlbase = this.$http.options.root;
     //请求的URL
-    var resUrl = urlbase+'/loanapplicant/api/loan-applications?page=0&size='+this.perSize+'&sort=id,ASC';
+    var resUrl = urlbase+'/merchant/api/brands?page=0&size='+this.perSize+'&sort=id,ASC';
 
     this.$http.get(resUrl).then(
       (response)=>{
@@ -163,10 +165,9 @@ export default {
       // this.activeName = sortment;
       //给目前的实例注册一个事件
       //alert(1);
-      var obj = {id: id, viewName: 'naoEdit'};
+      var obj = {id: id, viewName: 'doEdit'};
       this.$emit('jumpEdit', obj);
     },
-
     search: function(){
       this.form['name'] = this.name;
       this.filterString = '';
@@ -194,7 +195,6 @@ export default {
         }
       );
     },
-
     ccp: function(value){
       //服务器基本地址
       var urlbase = this.$http.options.root;
@@ -205,9 +205,9 @@ export default {
       //请求的URL
       //判断是否是查询还是正常显示
       if(this.filterString){
-        var resUrl = urlbase+'/loanapplicant/api/loan-applications?page='+page+'&size='+this.perSize+'&sort=id,ASC&filter='+this.filterString;
+        var resUrl = urlbase+'/merchant/api/brands?page='+page+'&size='+this.perSize+'&sort=id,ASC&filter='+this.filterString;
       }else{
-        var resUrl = urlbase+'/loanapplicant/api/loan-applications?page='+page+'&size='+this.perSize+'&sort=id,ASC';
+        var resUrl = urlbase+'/merchant/api/brands?page='+page+'&size='+this.perSize+'&sort=id,ASC';
       }
 
       this.$http.get(resUrl).then(
