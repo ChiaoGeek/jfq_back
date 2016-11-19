@@ -39,7 +39,10 @@
        <!-- <inputCom inputName='applyName'   inputWidth="120px" inputHeight="40px" ></inputCom> -->
        <div class="person-info">
           <div class="left">
-             <span class="label">银行名称</span> <span class="input"><inputCom inputName='applyName'   inputWidth="200px" inputHeight="40px" ></inputCom><span>
+             <span class="label">银行名称</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
 
        </div>
@@ -52,11 +55,12 @@
 
 <script>
 import right from "components/right/right.vue";
-import inputCom from "components/input/input.vue";
 export default {
-  name: 'aoEdit',
+  name: 'moEdit',
   data () {
-    return {}
+    return {
+      appt: [],
+    }
   },
   props: ['itemPara'],
   computed: {},
@@ -70,7 +74,6 @@ export default {
   },
   components:{
     right,
-    inputCom
   }
 }
 </script>
@@ -208,6 +211,19 @@ export default {
     margin-left: 35%;
 
 
-}
+    }
+    .inputtext{
+      border: 1px solid rgb(86, 142, 194);
+      width: 150px;
+      height: 40px;
+      color: #393939;
+      font-size: 18px;
+      line-height: 40px;
+      text-align: left;
+      font-family: PingFangSC-Regular;
+      border-radius: 4.5px;	/* relative value */
+      -moz-border-radius: 4.5px;
+      -webkit-border-radius: 4.5px;
+    }
 
 </style>

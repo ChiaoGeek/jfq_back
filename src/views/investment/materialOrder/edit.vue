@@ -39,50 +39,67 @@
        <!-- <inputCom inputName='applyName'   inputWidth="120px" inputHeight="40px" ></inputCom> -->
        <div class="person-info">
           <div class="left">
-             <span class="label">姓名</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
+             <span class="label">姓名</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name" v-model="listRes.nickname" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="right">
              <span class="label">管家</span>
              <span class="input">
-               <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-             <span>
+               <input type="text" class="inputtext" name="name" v-model="listRes.nickname" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="middle">
             <span class="label">电话</span>
             <span class="input">
-              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-            <span>
+              <input type="text" class="inputtext" name="name" v-model="listRes.nickname" :style="{width: '180px', height: '40px'}">
+            </span>
           </div>
        </div>
 
        <div class="person-info margin-top">
           <div class="left">
-             <span class="label">门店预约品牌</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
+             <span class="label">订单创建时间</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name" v-model="listRes.nickname" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="right">
-             <span class="label">管家</span>
+             <span class="label">总正价金额</span>
              <span class="input">
-               <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
+               <input type="text" class="inputtext" name="name" v-model="listRes.nickname" :style="{width: '180px', height: '40px'}">
+             </span>
+          </div>
+          <div class="middle">
+            <span class="label">总特价金额</span>
+            <span class="input">
+              <input type="text" class="inputtext" name="name" v-model="listRes.nickname" :style="{width: '180px', height: '40px'}">
+            </span>
+          </div>
+       </div>
+       <div class="person-info margin-top">
+          <div class="left">
+             <span class="label">总订单金额</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name" v-model="listRes.nickname" :style="{width: '180px', height: '40px'}">
+             </span>
+          </div>
+          <div class="right">
+             <span class="label">订单状态</span>
+             <span class="input">
+               <select class="select">
+                 <option  value="volvo">&nbsp;&nbsp;&nbsp;&nbsp;请选择</option>
+                 <option  value="mercedes">&nbsp;&nbsp;&nbsp;&nbsp;Mercedes</option>
+                 <option  value="audi">&nbsp;&nbsp;&nbsp;&nbsp;Audi</option>
+               </select>
              <span>
           </div>
           <div class="middle">
-            <span class="label">预约时间</span>
+            <span class="label">主材清单</span>
             <span class="input">
-              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-            <span>
-          </div>
-       </div>
-
-       <div class="person-info margin-top">
-          <div class="left">
-             <span class="label">业务经理</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
-          </div>
-
-          <div class="middle">
-            <span class="label">订单创建时间</span>
-            <span class="input">
-              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-            <span>
+              <input type="text" class="inputtext" name="name" v-model="listRes.nickname" :style="{width: '180px', height: '40px'}">
+            </span>
           </div>
        </div>
 
@@ -94,11 +111,12 @@
 
 <script>
 import right from "components/right/right.vue";
-import inputCom from "components/input/input.vue";
 export default {
   name: 'moEdit',
   data () {
-    return {}
+    return {
+      listRes: []
+    }
   },
   props: ['itemPara'],
   computed: {},
@@ -112,7 +130,6 @@ export default {
   },
   components:{
     right,
-    inputCom
   }
 }
 </script>
@@ -250,6 +267,20 @@ export default {
     margin-left: 35%;
 
 
+}
+
+.inputtext{
+  border: 1px solid rgb(86, 142, 194);
+  width: 150px;
+  height: 40px;
+  color: #393939;
+  font-size: 18px;
+  line-height: 40px;
+  text-align: left;
+  font-family: PingFangSC-Regular;
+  border-radius: 4.5px;	/* relative value */
+  -moz-border-radius: 4.5px;
+  -webkit-border-radius: 4.5px;
 }
 
 </style>

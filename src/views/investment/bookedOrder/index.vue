@@ -79,12 +79,11 @@
           <tr>
             <th width="40px">&nbsp;</th>
             <th width="48px">ID</th>
-            <th>姓名</th>
+            <th>用户名</th>
             <th>电话</th>
-            <th>门店(多个)</th>
             <th>预约时间</th>
-            <th>管家</th>
-            <th>订单创建时间</th>
+            <th>多个门店</th>
+
 
           </tr>
 
@@ -95,8 +94,7 @@
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
+
           </tr>
 
         </table>

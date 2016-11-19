@@ -58,7 +58,9 @@ import right from "components/right/right.vue";
 export default {
   name: 'bankEdit',
   data () {
-    return {}
+    return {
+      appt: [],
+    }
   },
   props: ['itemPara'],
   computed: {},
@@ -208,7 +210,18 @@ export default {
 
     margin-left: 35%;
 
-
 }
-
+.inputtext{
+  border: 1px solid rgb(86, 142, 194);
+  width: 150px;
+  height: 40px;
+  color: #393939;
+  font-size: 18px;
+  line-height: 40px;
+  text-align: left;
+  font-family: PingFangSC-Regular;
+  border-radius: 4.5px;	/* relative value */
+  -moz-border-radius: 4.5px;
+  -webkit-border-radius: 4.5px;
+}
 </style>

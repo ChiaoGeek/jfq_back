@@ -15,7 +15,7 @@
               <span class="span-blank"></span>
             </span>
 
-            <span class="rui-icon-text">
+            <span class="rui-icon-text" @click="edit('new', $event);">
               <a href="#" class="rui-icon">
                 <img src="./img/new.png" alt="" />
               </a>
@@ -113,7 +113,7 @@
 import right from "components/right/right.vue";
 import vPage from "components/v-page/index.vue";
 export default {
-  name: 'bookedOrder',
+  name: 'coEdit',
   data() {
     return {
       apptList: {},
@@ -178,7 +178,7 @@ export default {
       //alert(1);
       var obj = {
         id: id,
-        viewName: 'boEdit'
+        viewName: 'coEdit'
       };
       this.$emit('jumpEdit', obj);
     },

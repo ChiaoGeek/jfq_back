@@ -39,30 +39,35 @@
        <!-- <inputCom inputName='applyName'   inputWidth="120px" inputHeight="40px" ></inputCom> -->
        <div class="person-info">
           <div class="left">
-             <span class="label">公司名</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
+             <span class="label">公司名</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name" v-model="listRes.startTime" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="right">
              <span class="label">联系方式</span>
              <span class="input">
-               <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-             <span>
+               <input type="text" class="inputtext" name="name" v-model="listRes.startTime" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="middle">
             <span class="label">负责人</span>
             <span class="input">
-              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-            <span>
+              <input type="text" class="inputtext" name="name" v-model="listRes.startTime" :style="{width: '180px', height: '40px'}">
+            </span>
           </div>
        </div>
 
        <div class="person-info margin-top">
           <div class="left">
-             <span class="label">地址</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
+             <span class="label">地址</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name" v-model="listRes.startTime" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="middle">
              <span class="label">状态</span>
              <span class="input">
-               &nbsp;&nbsp;
                <select class="select">
                  <option  value="volvo">&nbsp;&nbsp;&nbsp;&nbsp;请选择</option>
                  <option  value="mercedes">&nbsp;&nbsp;&nbsp;&nbsp;服务中</option>
@@ -79,11 +84,12 @@
 
 <script>
 import right from "components/right/right.vue";
-import inputCom from "components/input/input.vue";
 export default {
   name: 'cmEdit',
   data () {
-    return {}
+    return {
+      listRes: []
+    }
   },
   props: ['itemPara'],
   computed: {},
@@ -97,7 +103,7 @@ export default {
   },
   components:{
     right,
-    inputCom
+    // inputCom
   }
 }
 </script>
@@ -235,6 +241,19 @@ export default {
     margin-left: 35%;
 
 
+}
+.inputtext{
+  border: 1px solid rgb(86, 142, 194);
+  width: 150px;
+  height: 40px;
+  color: #393939;
+  font-size: 18px;
+  line-height: 40px;
+  text-align: left;
+  font-family: PingFangSC-Regular;
+  border-radius: 4.5px;	/* relative value */
+  -moz-border-radius: 4.5px;
+  -webkit-border-radius: 4.5px;
 }
 
 </style>

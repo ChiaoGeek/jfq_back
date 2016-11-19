@@ -39,13 +39,13 @@
        <!-- <inputCom inputName='applyName'   inputWidth="120px" inputHeight="40px" ></inputCom> -->
        <div class="person-info">
           <div class="left">
-             <span class="label">姓名</span>
+             <span class="label">用户名</span>
              <span class="input">
                <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
           <div class="right">
-             <span class="label">门店</span>
+             <span class="label">预约时间</span>
              <span class="input">
                <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
              </span>
@@ -60,40 +60,52 @@
 
        <div class="person-info margin-top">
           <div class="left">
-             <span class="label">门店预约品牌</span>
-             <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
-             </span>
-          </div>
-          <div class="right">
              <span class="label">管家</span>
              <span class="input">
                <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
-          <div class="middle">
-            <span class="label">预约时间</span>
-            <span class="input">
-              <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
-            </span>
-          </div>
-       </div>
 
-       <div class="person-info margin-top">
+       </div>
+<!-- more -->
+    <div class="more">
+       <div class="person-info  margin-top" style="border-top:2px solid rgb(211, 211, 211);padding-top:20px">
           <div class="left">
-             <span class="label">业务经理</span>
+             <span class="label">门店1</span>
              <span class="input">
                <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
-
+          <div class="right">
+             <span class="label">门店地址</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+             </span>
+          </div>
           <div class="middle">
-            <span class="label">订单创建时间</span>
+            <span class="label">门店电话</span>
             <span class="input">
               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
             </span>
           </div>
        </div>
+       <div class="person-info  margin-top" >
+          <div class="left">
+             <span class="label">品牌</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+             </span>
+          </div>
+          <div class="middle">
+            <span class="label">导购</span>
+            <span class="input">
+              <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+            </span>
+          </div>
+       </div>
+    </div>
+<!-- more -->
+
     </div>
   </right>
 </template>
@@ -257,6 +269,19 @@ export default {
     margin-left: 35%;
 
 
+}
+.inputtext{
+  border: 1px solid rgb(86, 142, 194);
+  width: 150px;
+  height: 40px;
+  color: #393939;
+  font-size: 18px;
+  line-height: 40px;
+  text-align: left;
+  font-family: PingFangSC-Regular;
+  border-radius: 4.5px;	/* relative value */
+  -moz-border-radius: 4.5px;
+  -webkit-border-radius: 4.5px;
 }
 
 </style>
