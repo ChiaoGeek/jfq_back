@@ -62,8 +62,6 @@
           <div class="left">
             <span class="label">状态</span>
             <span class="input">
-              <!-- <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom> -->
-
               <select class="select">
                 <option  value="true" :selected="available ? true : false">&nbsp;&nbsp;&nbsp;&nbsp;接单</option>
                 <option  value="false" :selected="available ?  false : true">&nbsp;&nbsp;&nbsp;&nbsp;不接单</option>

@@ -3,7 +3,7 @@
       <div id="right-up">
           <div id="right-up-blank"></div>
           <div id="right-up-icon">
-            <span class="rui-icon-text">
+            <span class="rui-icon-text" >
               <a href="#" class="rui-icon">
                 <img src="./img/edit.png" alt="" />
               </a>
@@ -15,7 +15,7 @@
               <span class="span-blank"></span>
             </span>
 
-            <span class="rui-icon-text">
+            <span class="rui-icon-text" @click="edit('new', $event);">
               <a href="#" class="rui-icon">
                 <img src="./img/new.png" alt="" />
               </a>
@@ -61,10 +61,12 @@
           </div>
           <div id="right-form-content">
             <form class="" action="index.html" method="post">
-              <input type="text" name="name" value="" class="rfc-input" placeholder="申请人姓名">
-              <input type="text" name="name" value="" class="rfc-input" placeholder="申请人电话">
-              <input type="text" name="name" value="" class="rfc-input" placeholder="激活人姓名">
-              <input type="text" name="name" value="" class="rfc-input" placeholder="激活人电话">
+              <input type="text" name="name" value="" class="rfc-input" placeholder="姓名">
+              <select class="rfc-select" name="available" v-model='available'  @change="search">
+                <option  value="" >&nbsp;&nbsp;&nbsp;&nbsp;状态</option>
+                <option  value="true">&nbsp;&nbsp;&nbsp;&nbsp;服务中</option>
+                <option  value="false">&nbsp;&nbsp;&nbsp;&nbsp;不服务</option>
+              </select>
             </form>
           </div>
           <div id="rfc-search">
@@ -93,7 +95,7 @@
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
-          
+
 
 
           </tr>
@@ -110,7 +112,7 @@
 import right from "components/right/right.vue";
 import vPage from "components/v-page/index.vue";
 export default {
-  name: 'decorationOrder',
+  name: 'houseKeeper',
   data () {
     return {
       listRes: '', //服务器端查询的数据
@@ -155,7 +157,7 @@ export default {
       // this.activeName = sortment;
       //给目前的实例注册一个事件
       //alert(1);
-      var obj = {id: id, viewName: 'doEdit'};
+      var obj = {id: id, viewName: 'hkEdit'};
       this.$emit('jumpEdit', obj);
     },
     search: function(){

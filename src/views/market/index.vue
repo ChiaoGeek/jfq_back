@@ -4,7 +4,6 @@
        <left-up></left-up>
        <left-down @onChangeTemplate="selectATemplate" ></left-down>
      </left>
-
      <sp-component v-bind:is="currentView" @jumpEdit="updateInfo" @cancelEdit="cancel" v-bind:itemPara="itemPara"></sp-component>
    </container>
 

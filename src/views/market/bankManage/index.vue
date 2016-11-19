@@ -3,7 +3,7 @@
       <div id="right-up">
           <div id="right-up-blank"></div>
           <div id="right-up-icon">
-            <span class="rui-icon-text">
+            <span class="rui-icon-text" >
               <a href="#" class="rui-icon">
                 <img src="./img/edit.png" alt="" />
               </a>
@@ -15,7 +15,7 @@
               <span class="span-blank"></span>
             </span>
 
-            <span class="rui-icon-text">
+            <span class="rui-icon-text" @click="edit('new', $event);">
               <a href="#" class="rui-icon">
                 <img src="./img/new.png" alt="" />
               </a>
@@ -59,14 +59,14 @@
           <div id="right-form-blank">
 
           </div>
-          <div id="right-form-content">
+          <!-- <div id="right-form-content">
             <form class="" action="index.html" method="post">
               <input type="text" name="name" value="" class="rfc-input" placeholder="申请人姓名">
               <input type="text" name="name" value="" class="rfc-input" placeholder="申请人电话">
               <input type="text" name="name" value="" class="rfc-input" placeholder="激活人姓名">
               <input type="text" name="name" value="" class="rfc-input" placeholder="激活人电话">
             </form>
-          </div>
+          </div> -->
           <div id="rfc-search">
               <img src="./img/search.png" alt="" />
           </div>
@@ -86,7 +86,7 @@
             <td @click="edit(todo.id, $event);" style="cursor:pointer;">编辑</td>
             <td>{{todo.id}}</td>
             <td>{{todo.name}}</td>
-          
+
 
 
           </tr>
@@ -148,7 +148,7 @@ export default {
       // this.activeName = sortment;
       //给目前的实例注册一个事件
       //alert(1);
-      var obj = {id: id, viewName: 'doEdit'};
+      var obj = {id: id, viewName: 'bankEdit'};
       this.$emit('jumpEdit', obj);
     },
     search: function(){

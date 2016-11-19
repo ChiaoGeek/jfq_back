@@ -15,7 +15,7 @@
               <span class="span-blank"></span>
             </span>
 
-            <span class="rui-icon-text">
+            <span class="rui-icon-text" @click="edit('new', $event);">
               <a href="#" class="rui-icon">
                 <img src="./img/new.png" alt="" />
               </a>
@@ -65,6 +65,21 @@
               <input type="text" name="name" value="" class="rfc-input" placeholder="申请人电话">
               <input type="text" name="name" value="" class="rfc-input" placeholder="激活人姓名">
               <input type="text" name="name" value="" class="rfc-input" placeholder="激活人电话">
+              <select class="rfc-select" name="available" v-model='available'  @change="search">
+                <option  value="" >&nbsp;&nbsp;&nbsp;&nbsp;订单状态</option>
+                <option  value="true">&nbsp;&nbsp;&nbsp;&nbsp;接单中</option>
+                <option  value="false">&nbsp;&nbsp;&nbsp;&nbsp;不接单</option>
+              </select>
+              <select class="rfc-select" name="available" v-model='available'  @change="search">
+                <option  value="" >&nbsp;&nbsp;&nbsp;&nbsp;期望分期</option>
+                <option  value="">&nbsp;&nbsp;&nbsp;&nbsp;一期</option>
+                <option  value="">&nbsp;&nbsp;&nbsp;&nbsp;二期</option>
+              </select>
+              <select class="rfc-select" name="available" v-model='available'  @change="search">
+                <option  value="" >&nbsp;&nbsp;&nbsp;&nbsp;是否在职</option>
+                <option  value="">&nbsp;&nbsp;&nbsp;&nbsp;是</option>
+                <option  value="">&nbsp;&nbsp;&nbsp;&nbsp;否</option>
+              </select>
             </form>
           </div>
           <div id="rfc-search">
@@ -90,7 +105,7 @@
             <th>订单状态</th>
 
           </tr>
-          <tr v-for="todo in listRes">
+          <!-- <tr v-for="todo in listRes">
             <td @click="edit(todo.id, $event);" style="cursor:pointer;">编辑</td>
             <td>{{todo.id}}</td>
             <td>{{todo.name}}</td>
@@ -103,9 +118,20 @@
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
-
-
-
+          </tr> -->
+          <tr v-for="todo in 20">
+            <td >编辑</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
           </tr>
 
         </table>
@@ -127,6 +153,7 @@ export default {
 
       //需要查询的字段
       name: '',
+      available: '',
 
 
       form: {}, //把搜索的字段封装成数组
@@ -165,7 +192,7 @@ export default {
       // this.activeName = sortment;
       //给目前的实例注册一个事件
       //alert(1);
-      var obj = {id: id, viewName: 'doEdit'};
+      var obj = {id: id, viewName: 'naoEdit'};
       this.$emit('jumpEdit', obj);
     },
     search: function(){

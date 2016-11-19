@@ -3,7 +3,7 @@
       <div id="right-up">
           <div id="right-up-blank"></div>
           <div id="right-up-icon">
-            <span class="rui-icon-text">
+            <span class="rui-icon-text" >
               <a href="#" class="rui-icon">
                 <img src="./img/edit.png" alt="" />
               </a>
@@ -15,7 +15,7 @@
               <span class="span-blank"></span>
             </span>
 
-            <span class="rui-icon-text">
+            <span class="rui-icon-text" @click="edit('new', $event);">
               <a href="#" class="rui-icon">
                 <img src="./img/new.png" alt="" />
               </a>
@@ -61,8 +61,11 @@
           </div>
           <div id="right-form-content">
             <form class="" action="index.html" method="post">
-              <input type="text" name="name" value="" class="rfc-input" placeholder="申请人姓名">
-              <input type="text" name="name" value="" class="rfc-input" placeholder="申请人电话">
+              <input type="text" name="name" value="" class="rfc-input" placeholder="姓名">
+              <input type="text" name="name" value="" class="rfc-input" placeholder="电话">
+              <input type="text" name="name" value="" class="rfc-input" placeholder="管家">
+              <input type="text" name="name" value="" class="rfc-input" placeholder="业务经理">
+              <input type="text" name="name" value="" class="rfc-input" placeholder="门店">
             </form>
           </div>
           <div id="rfc-search">
@@ -78,7 +81,7 @@
             <th width="48px">ID</th>
             <th>姓名</th>
             <th>电话</th>
-            <th>门店</th>
+            <th>门店(多个)</th>
             <th>预约时间</th>
             <th>管家</th>
             <th>订单创建时间</th>

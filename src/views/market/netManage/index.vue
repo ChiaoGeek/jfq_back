@@ -15,7 +15,7 @@
               <span class="span-blank"></span>
             </span>
 
-            <span class="rui-icon-text">
+            <span class="rui-icon-text" @click="edit('new', $event);">
               <a href="#" class="rui-icon">
                 <img src="./img/new.png" alt="" />
               </a>
@@ -61,10 +61,11 @@
           </div>
           <div id="right-form-content">
             <form class="" action="index.html" method="post">
-              <input type="text" name="name" value="" class="rfc-input" placeholder="申请人姓名">
-              <input type="text" name="name" value="" class="rfc-input" placeholder="申请人电话">
-              <input type="text" name="name" value="" class="rfc-input" placeholder="激活人姓名">
-              <input type="text" name="name" value="" class="rfc-input" placeholder="激活人电话">
+              <select class="rfc-select" name="" v-model='available'  @change="search">
+                <option  value="" >&nbsp;&nbsp;&nbsp;&nbsp;银行</option>
+                <option  value="">&nbsp;&nbsp;&nbsp;&nbsp;工商银行</option>
+                <option  value="">&nbsp;&nbsp;&nbsp;&nbsp;招商银行</option>
+              </select>
             </form>
           </div>
           <div id="rfc-search">
@@ -82,9 +83,9 @@
             <th>分行</th>
             <th>支行</th>
             <th>网点</th>
-            <th>期数</th>
-            <th>推荐人</th>
-
+            <th>期数（多个）</th>
+            <th>付息方式</th>
+            <th>推荐人（多个）</th>
           </tr>
           <tr v-for="todo in listRes">
             <td @click="edit(todo.id, $event);" style="cursor:pointer;">编辑</td>
@@ -95,11 +96,8 @@
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
-
-
-
+            <td>&nbsp;</td>
           </tr>
-
         </table>
         <div id="page" >
           <v-page :pePageThreshould="5" v-bind:peAllPageNumber="allPageNumber" :peCurrentPage="currentPage"  @changeCurrentPage="ccp"></v-page>
@@ -112,7 +110,7 @@
 import right from "components/right/right.vue";
 import vPage from "components/v-page/index.vue";
 export default {
-  name: 'decorationOrder',
+  name: 'netManage',
   data () {
     return {
       listRes: '', //服务器端查询的数据
@@ -157,7 +155,7 @@ export default {
       // this.activeName = sortment;
       //给目前的实例注册一个事件
       //alert(1);
-      var obj = {id: id, viewName: 'doEdit'};
+      var obj = {id: id, viewName: 'nmEdit'};
       this.$emit('jumpEdit', obj);
     },
     search: function(){

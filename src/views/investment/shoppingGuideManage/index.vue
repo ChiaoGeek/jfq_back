@@ -14,7 +14,6 @@
               </span>
               <span class="span-blank"></span>
             </span>
-
             <span class="rui-icon-text">
               <a href="#" class="rui-icon">
                 <img src="./img/new.png" alt="" />

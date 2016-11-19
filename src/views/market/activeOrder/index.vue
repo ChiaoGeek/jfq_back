@@ -15,7 +15,7 @@
               <span class="span-blank"></span>
             </span>
 
-            <span class="rui-icon-text">
+            <span class="rui-icon-text" @click="edit('new', $event);">
               <a href="#" class="rui-icon">
                 <img src="./img/new.png" alt="" />
               </a>
@@ -65,6 +65,21 @@
               <input type="text" name="name" value="" class="rfc-input" placeholder="申请人电话">
               <input type="text" name="name" value="" class="rfc-input" placeholder="激活人姓名">
               <input type="text" name="name" value="" class="rfc-input" placeholder="激活人电话">
+              <select class="rfc-select" name="available" v-model='available'  @change="search">
+                <option  value="" >&nbsp;&nbsp;&nbsp;&nbsp;所选银行</option>
+                <option  value="true">&nbsp;&nbsp;&nbsp;&nbsp;工商银行</option>
+                <option  value="false">&nbsp;&nbsp;&nbsp;&nbsp;招商银行</option>
+              </select>
+              <select class="rfc-select" name="available" v-model='available'  @change="search">
+                <option  value="" >&nbsp;&nbsp;&nbsp;&nbsp;推荐人</option>
+                <option  value="">&nbsp;&nbsp;&nbsp;&nbsp;推荐人1</option>
+                <option  value="">&nbsp;&nbsp;&nbsp;&nbsp;推荐人2</option>
+              </select>
+              <select class="rfc-select" name="available" v-model='available'  @change="search">
+                <option  value="" >&nbsp;&nbsp;&nbsp;&nbsp;订单状态</option>
+                <option  value="">&nbsp;&nbsp;&nbsp;&nbsp;接单</option>
+                <option  value="">&nbsp;&nbsp;&nbsp;&nbsp;不接单</option>
+              </select>
             </form>
           </div>
           <div id="rfc-search">
@@ -83,6 +98,7 @@
             <th>激活人姓名</th>
             <th>激活人电话</th>
             <th>申办额度</th>
+            <th>可申办总额度</th>
             <th>所选银行</th>
             <th>推荐人</th>
             <th>地区（省市区）</th>
@@ -95,6 +111,7 @@
             <td @click="edit(todo.id, $event);" style="cursor:pointer;">编辑</td>
             <td>{{todo.id}}</td>
             <td>{{todo.name}}</td>
+            <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
@@ -129,6 +146,7 @@ export default {
 
       //需要查询的字段
       name: '',
+      available: '',
 
 
       form: {}, //把搜索的字段封装成数组
@@ -167,7 +185,7 @@ export default {
       // this.activeName = sortment;
       //给目前的实例注册一个事件
       //alert(1);
-      var obj = {id: id, viewName: 'doEdit'};
+      var obj = {id: id, viewName: 'aoEdit'};
       this.$emit('jumpEdit', obj);
     },
     search: function(){

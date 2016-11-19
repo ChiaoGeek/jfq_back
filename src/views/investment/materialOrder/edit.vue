@@ -1,146 +1,118 @@
 <template lang="html">
-    <right >
-      <div id="right-up">
-          <div id="right-up-blank"></div>
-          <div id="right-up-icon">
-            <span class="rui-icon-text">
-              <a href="#" class="rui-icon">
-                <img src="./img/edit.png" alt="" />
-              </a>
-              <span class="rui-text">
-                <a href="#" class="rui-text-a">
-                  编辑
-                </a>
-              </span>
-              <span class="span-blank"></span>
-            </span>
-
-            <span class="rui-icon-text">
-              <a href="#" class="rui-icon">
-                <img src="./img/new.png" alt="" />
-              </a>
-              <span class="rui-text">
-                <a href="#" class="rui-text-a">
-                  新建
-                </a>
-              </span>
-              <span class="span-blank"></span>
-            </span>
-
-            <span class="rui-icon-text">
-              <a href="#" class="rui-icon">
-                <img src="./img/import.png" alt="" />
-              </a>
-
-              <span class="rui-text">
-                <a href="#" class="rui-text-a">
-                  导入
-                </a>
-              </span>
-              <span class="span-blank"></span>
-            </span>
-
-            <span class="rui-icon-text">
-              <a href="#" class="rui-icon">
-                <img src="./img/export.png" alt="" />
-              </a>
-              <span class="rui-text">
-                <a href="#" class="rui-text-a">
-                  导出
-                </a>
-              </span>
-              <span class="span-blank"></span>
-            </span>
-
-          </div>
+  <right >
+    <div id="right-up">
+        <div id="right-up-blank"></div>
+        <div id="right-up-text">
+          {{itemPara}}
         </div>
+        <div id="right-up-icon">
+          <span class="rui-icon-text">
+            <a href="#" class="rui-icon">
+              <img src="../../../../static/img/save.png" alt="" />
+            </a>
+            <span class="rui-text">
+              <a href="#" class="rui-text-a">
+                保存
+              </a>
+            </span>
+            <span class="span-blank"></span>
+          </span>
 
-        <div id="right-form">
-          <div id="right-form-blank">
+          <span class="rui-icon-text" @click='cancel("bookedOrder", $event)'>
+            <a href="#" class="rui-icon">
+              <img src="../../../../static/img/cancel.png" alt="" />
+            </a>
+            <span class="rui-text">
+              <a href="#" class="rui-text-a"  >
+                取消
+              </a>
+            </span>
+            <span class="span-blank"></span>
+          </span>
 
-          </div>
-          <div id="right-form-content">
-            <form class="" action="index.html" method="post">
-              <input type="text" name="name" value="" class="rfc-input" placeholder="申请人姓名">
-              <input type="text" name="name" value="" class="rfc-input" placeholder="申请人电话">
-            </form>
-          </div>
-          <div id="rfc-search">
-              <img src="./img/search.png" alt="" />
-          </div>
-
-      </div>
-
-      <div id="right-table">
-        <table >
-          <tr>
-            <th width="40px">&nbsp;</th>
-            <th width="48px">ID</th>
-            <th>姓名</th>
-            <th>电话</th>
-            <th>管家</th>
-            <th>订单创建时间</th>
-            <th>总特价金额</th>
-            <th>总订单金额</th>
-            <th>门店</th>
-            <th>订单状态</th>
-
-
-          </tr>
-
-          <tr v-for="todo in (1,20)">
-            <td @click="edit(todo, $event);" style="cursor:pointer;">编辑</td>
-            <td>{{todo}}</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-
-
-          </tr>
-
-        </table>
-        <div id="page">
-          <a href="#" class="pre"><img src="./img/first.png" alt="" /></a>
-          <a href="#" class="pre"><img src="./img/pre.png" alt="" /></a>
-          <a href="#"  class="pagenum">1</a>
-          <a href="#"  class="focus">2</a>
-          <a href="#"  class="focus">3</a>
-          ....
-          <a href="#"  class="focus">20</a>
-          <a href="#"  class="focus">21</a>
-          <a href="#"  class="focus">22</a>
-          <a href="#" class="pre"><img src="./img/next.png" alt="" /></a>
-          <a href="#" class="pre"><img src="./img/last.png" alt="" /></a>
         </div>
       </div>
-    </right>
+
+
+
+    <div id="right-table">
+       <!-- <inputCom inputName='applyName'   inputWidth="120px" inputHeight="40px" ></inputCom> -->
+       <div class="person-info">
+          <div class="left">
+             <span class="label">姓名</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
+          </div>
+          <div class="right">
+             <span class="label">管家</span>
+             <span class="input">
+               <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
+             <span>
+          </div>
+          <div class="middle">
+            <span class="label">电话</span>
+            <span class="input">
+              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
+            <span>
+          </div>
+       </div>
+
+       <div class="person-info margin-top">
+          <div class="left">
+             <span class="label">门店预约品牌</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
+          </div>
+          <div class="right">
+             <span class="label">管家</span>
+             <span class="input">
+               <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
+             <span>
+          </div>
+          <div class="middle">
+            <span class="label">预约时间</span>
+            <span class="input">
+              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
+            <span>
+          </div>
+       </div>
+
+       <div class="person-info margin-top">
+          <div class="left">
+             <span class="label">业务经理</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
+          </div>
+
+          <div class="middle">
+            <span class="label">订单创建时间</span>
+            <span class="input">
+              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
+            <span>
+          </div>
+       </div>
+
+
+
+    </div>
+  </right>
 </template>
 
 <script>
 import right from "components/right/right.vue";
+import inputCom from "components/input/input.vue";
 export default {
-  name: 'buildingMaterialManage',
+  name: 'moEdit',
   data () {
     return {}
   },
+  props: ['itemPara'],
   computed: {},
   mounted () {},
   methods: {
-    edit: function(id, event){
-      // this.activeName = sortment;
-      //给目前的实例注册一个事件
-      // alert(1);
-      var obj = {id: id, viewName: 'bmmEdit'};
-      this.$emit('jumpEdit', obj);
-    },
+    cancel: function(componentName, event){
+
+       var obj = {componentName:componentName};
+       this.$emit('cancelEdit', obj);
+    }
   },
   components:{
-    right
+    right,
+    inputCom
   }
 }
 </script>
@@ -151,18 +123,25 @@ export default {
   width: 100%;
   height: 40px;
   background-color: #fff;
+
 }
 #right-up-blank{
-  width: 13px;
+  /*width: 13px;
   height: 40px;
-  float: left;
+  float: left;*/
 }
 #right-up-icon{
-  width: 500px;
-  margin-left: 13px;
   height: 40px;
-  float: left;
-
+  float: right;
+  margin-right: 40px;
+}
+#right-up-text{
+  position: absolute;
+  left: 170px;
+  top: 10px;
+  color: #393939;
+  font-size: 16px;
+  font-family: PingFangSC-Regular;
 }
 .rui-icon-text{
   display: block;
@@ -208,111 +187,69 @@ export default {
   height: 1px;
 
 }
-#right-form{
-  height: 25px;
-  margin-top: 10px;
-}
-
-#right-form-content{
-  width: auto;
-  height: 20px;
-  float: left;
-
-}
-.rfc-input{
-  width: 80px;
-  color: #999999;
-  margin-left: 5px;
-  display: block;
-  float: left;
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-  font-family: PingFangSC-Regular;
-  border-radius: 4.5px;	/* relative value */
-  -moz-border-radius: 4.5px;
-  -webkit-border-radius: 4.5px;
-  border: .5px  #5E90C0 solid;
-}
-.rfc-select{
-  width: 120px;
-  color: #999999;
-  margin-left: 5px;
-  display: block;
-  float: left;
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-  font-family: PingFangSC-Regular;
-  border-radius: 4.5px;	/* relative value */
-  -moz-border-radius: 4.5px;
-  -webkit-border-radius: 4.5px;
-  border: 0.5px solid #5E90C0;
-  background-color: #fff;
-  /*text-align-last:center;*/
-
-}
-#rfc-search{
-  float: right;
-  margin-right: 10px;
-
-}
 #right-table{
-
   /*height: 500px;*/
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 20px;
-}
-#right-table table{
-  width: 100%;
-  border-collapse: collapse;
-  border: 1px solid #aaa;
+  padding-top: 20px;
+  min-height: 750px;
   background-color: #fff;
   box-shadow: -1px 3px 8px rgb(188, 183, 180);
-}
 
-#right-table table th{
-    font-family: PingFangSC-Regular;
-    height: 30px;
-    border:1px solid rgb(211, 211, 211);   /* 行名称边框 */
-    color:rgb(55, 55, 55);              /* 行名称颜色 */
-    font-size: 14px;
-    padding-top:4px;
-    padding-bottom:4px;
-    padding-left:12px;
-    padding-right:12px;
-    text-align:center;
 }
-#right-table table td{
-    font-family: PingFangSC-Regular;
-    height: 30px;
-    border:1px solid rgb(211, 211, 211);   /* 行名称边框 */
-    color:rgb(55, 55, 55);              /* 行名称颜色 */
-    font-size: 14px;
-    padding-top:4px;
-    padding-bottom:4px;
-    padding-left:12px;
-    padding-right:12px;
-    text-align:center;
+.person-info{
+  width: 96%;
+  margin: auto;
+  height: 41px;
 }
-#page{
-    width: 100%;
-    height: auto;
-    margin-top: 10px;
-    text-align: center;
+.margin-top{
+  margin-top: 30px;
 }
-.pagenum{
-  font-size: 10px;
+.label{
   color: #393939;
-  text-decoration: none;
+  font-size: 16px;
   font-family: PingFangSC-Regular;
+  letter-spacing: 1px;
+  display: block;
+  float: left;
+  width: 105px;
+  line-height: 40px;
+  text-align: right;
 }
-.focus{
-  font-size: 10px;
-  color: rgb(116, 116, 116);
-  text-decoration: none;
+.input{
+  float: left;
+  display: block;
+  margin-left: 10px;
+}
+.select{
+  width: 180px;
+  height: 40px;
+  color: #393939;
+  font-size: 14px;
+  line-height: 40px;
+  text-align: center;
   font-family: PingFangSC-Regular;
+  border-radius: 4.5px;	/* relative value */
+  -moz-border-radius: 4.5px;
+  -webkit-border-radius: 4.5px;
+  border: 1px solid #5E90C0;
+  background-color: #fff;
+}
+.left{
+  width: 30%;
+  float: left;
+  }
+.right{
+  width: 30%;
+  float: right;
+  }
+.middle{
+    width: 30%;
+
+    margin-left: 35%;
+
+
 }
 
 </style>
