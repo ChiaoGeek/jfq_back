@@ -118,7 +118,6 @@ export default {
       allPageNumber: null, //总页数
       currentPage: null, //当前页面
       count: 0,
-
       perSize: 20, //每页面显示的数据
     }
   },
