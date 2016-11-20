@@ -43,19 +43,19 @@
           <div class="left">
              <span class="label">用户名</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.customerName" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
           <div class="right">
              <span class="label">预约时间</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.orderTime" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
           <div class="middle">
             <span class="label">电话</span>
             <span class="input">
-              <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+              <input type="text" class="inputtext" name="name" v-model="listRes.customerMobile" :style="{width: '180px', height: '40px'}">
             </span>
           </div>
        </div>
@@ -64,7 +64,7 @@
           <div class="left">
              <span class="label">管家</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.managerId" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
 
@@ -75,19 +75,19 @@
           <div class="left">
              <span class="label">门店1</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.customerName" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
           <div class="right">
              <span class="label">门店地址</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.customerName" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
           <div class="middle">
             <span class="label">门店电话</span>
             <span class="input">
-              <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+              <input type="text" class="inputtext" name="name" v-model="listRes.customerName" :style="{width: '180px', height: '40px'}">
             </span>
           </div>
        </div>
@@ -95,13 +95,13 @@
           <div class="left">
              <span class="label">品牌</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.customerName" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
           <div class="middle">
             <span class="label">导购</span>
             <span class="input">
-              <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+              <input type="text" class="inputtext" name="name" v-model="listRes.customerName" :style="{width: '180px', height: '40px'}">
             </span>
           </div>
        </div>
@@ -120,12 +120,28 @@ export default {
 
   data () {
     return {
-      appt: [],
+      listRes: {},
     }
   },
   props: ['itemPara'],
   computed: {},
-  mounted () {},
+  mounted () {
+    //服务器基本地址
+    var urlbase = this.$http.options.root;
+    this.imgUrlBase = this.$http.options.imgRoot;
+    //请求的URL
+    var resUrl = urlbase+'/materialorder/api/admin/materialOrders/'+this.itemPara;
+
+    this.$http.get(resUrl).then(
+      (response)=>{
+        //查询出服务器的数据
+        this.listRes = response.body.data;
+      },
+      (err)=>{
+        console.log(err);
+      }
+    );
+  },
   methods: {
     cancel: function(componentName, event){
 

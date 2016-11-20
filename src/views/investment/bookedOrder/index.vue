@@ -90,11 +90,11 @@
           </tr>
 
           <tr v-for="todo in listRes">
-            <td @click="edit(todo.id, $event);" style="cursor:pointer;">编辑</td>
+            <td @click="edit(todo.number, $event);" style="cursor:pointer;">编辑</td>
             <td>{{todo.id}}</td>
-            <td>{{todo.name}}</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
+            <td>{{todo.customerName}}</td>
+            <td>{{todo.customerMobile}}</td>
+            <td>{{todo.orderTime}}</td>
             <td>&nbsp;</td>
 
           </tr>
@@ -135,7 +135,7 @@ export default {
     //服务器基本地址
     var urlbase = this.$http.options.root;
     //请求的URL
-    var resUrl = urlbase+'/merchant/api/brands?page=0&size='+this.perSize+'&sort=id,ASC';
+    var resUrl = urlbase+'/materialorder/api/admin/materialOrders?page=0&size='+this.perSize+'&sort=id,ASC';
 
     this.$http.get(resUrl).then(
       (response)=>{

@@ -83,9 +83,6 @@ export default {
       (response)=>{
         //查询出服务器的数据
         this.listRes = response.body.data;
-
-
-
       },
       (err)=>{
         console.log(err);
