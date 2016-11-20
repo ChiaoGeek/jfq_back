@@ -31,6 +31,7 @@
           </span>
 
         </div>
+        <navigation></navigation>
       </div>
 
 
@@ -68,6 +69,7 @@
 <script>
 import right from "components/right/right.vue";
 import commonJs from "src/common.js";
+import navigation from "components/nav/index.vue";
 export default {
   name: 'naoEdit',
   data () {
@@ -173,7 +175,7 @@ export default {
   },
   components:{
     right,
-
+    navigation
   }
 }
 </script>

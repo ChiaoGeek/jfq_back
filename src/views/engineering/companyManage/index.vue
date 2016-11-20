@@ -53,6 +53,8 @@
             </span>
 
           </div>
+          <navigation></navigation>
+
         </div>
 
         <div id="right-form">
@@ -105,6 +107,7 @@
 <script>
 import right from "components/right/right.vue";
 import vPage from "components/v-page/index.vue";
+import navigation from "components/nav/index.vue";
 export default {
   name: 'bookedOrder',
   data() {
@@ -167,7 +170,7 @@ export default {
     edit: function(id, event) {
       // this.activeName = sortment;
       //给目前的实例注册一个事件
-  
+
       var obj = {
         id: id,
         viewName: 'cmEdit'
@@ -220,7 +223,9 @@ export default {
   },
   components: {
     right,
-    vPage
+    vPage,
+    navigation
+
   }
 }
 </script>

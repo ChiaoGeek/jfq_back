@@ -53,6 +53,8 @@
             </span>
 
           </div>
+          <navigation></navigation>
+
         </div>
 
         <div id="right-form">
@@ -326,6 +328,7 @@
 
 <script>
 import right from "components/right/right.vue";
+import navigation from "components/nav/index.vue";
 export default {
   name: 'rightstoremanage',
   data () {
@@ -335,7 +338,8 @@ export default {
   mounted () {},
   methods: {},
   components:{
-    right
+    right,
+    navigation
   }
 }
 </script>

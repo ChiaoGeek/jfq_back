@@ -31,6 +31,8 @@
           </span>
 
         </div>
+        <navigation></navigation>
+
       </div>
 
 
@@ -94,6 +96,8 @@
 
 <script>
 import right from "components/right/right.vue";
+import navigation from "components/nav/index.vue";
+
 export default {
   name: 'rmEdit',
   data () {
@@ -113,6 +117,8 @@ export default {
   },
   components:{
     right,
+    navigation
+
   }
 }
 </script>

@@ -31,6 +31,8 @@
           </span>
 
         </div>
+        <navigation></navigation>
+
       </div>
 
 
@@ -75,6 +77,8 @@
 <script>
 import right from "components/right/right.vue";
 import commonJs from "src/common.js";
+import navigation from "components/nav/index.vue";navigation
+
 export default {
   name: 'smEdit',
   data () {
@@ -119,7 +123,7 @@ export default {
       this.$http.post(resUrl, this.listRes).then(
         (response) => {
           //查询出服务器的数据
-          
+
           commonJs.savaSuccess('数据保存成功！！！');
 
 
@@ -134,7 +138,7 @@ export default {
   },
   components:{
     right,
-    // inputCom
+    navigation
   }
 }
 </script>

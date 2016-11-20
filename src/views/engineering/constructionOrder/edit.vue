@@ -31,6 +31,9 @@
           </span>
 
         </div>
+
+        <navigation></navigation>
+
       </div>
 
 
@@ -118,7 +121,7 @@
 
 <script>
 import right from "components/right/right.vue";
-// import inputCom from "components/input/input.vue";
+import navigation from "components/nav/index.vue";
 import commonJs from "src/common.js";
 export default {
   name: 'coEdit',
@@ -204,7 +207,7 @@ export default {
   },
   components: {
     right,
-    // inputCom
+    navigation
   }
 }
 </script>

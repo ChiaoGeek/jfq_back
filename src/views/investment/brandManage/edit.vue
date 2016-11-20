@@ -31,6 +31,8 @@
           </span>
 
         </div>
+        <navigation></navigation>
+
       </div>
 
 
@@ -91,6 +93,7 @@
 
 <script>
 import right from "components/right/right.vue";
+import navigation from "components/nav/index.vue";
 import commonJs from "src/common.js";export default {
   name: 'bmEdit',
   data () {
@@ -229,7 +232,7 @@ import commonJs from "src/common.js";export default {
   },
   components:{
     right,
-    // inputCom
+    navigation
   }
 }
 </script>

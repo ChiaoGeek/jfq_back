@@ -53,6 +53,8 @@
             </span>
 
           </div>
+          <navigation></navigation>
+
         </div>
 
         <div id="right-form">
@@ -115,6 +117,7 @@
 <script>
 import right from "components/right/right.vue";
 import vPage from "components/v-page/index.vue";
+import navigation from "components/nav/index.vue";
 export default {
   name: 'decorationOrder',
   data () {
@@ -222,7 +225,8 @@ export default {
   },
   components:{
     right,
-    vPage
+    vPage,
+    navigation
   }
 }
 </script>

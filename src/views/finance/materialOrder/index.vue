@@ -53,6 +53,8 @@
             </span>
 
           </div>
+          <navigation></navigation>
+
         </div>
 
         <div id="right-form">
@@ -124,6 +126,7 @@
 <script>
 import right from "components/right/right.vue";
 import vPage from "components/v-page/index.vue";
+import navigation from "components/nav/index.vue";
 export default {
   name: 'decorationOrder',
   data () {
@@ -170,7 +173,7 @@ export default {
       // this.activeName = sortment;
       //给目前的实例注册一个事件
       //alert(1);
-      var obj = {id: id, viewName: 'doEdit'};
+      var obj = {id: id, viewName: 'moEdit'};
       this.$emit('jumpEdit', obj);
     },
     search: function(){
@@ -231,7 +234,9 @@ export default {
   },
   components:{
     right,
-    vPage
+    vPage,
+    navigation
+
   }
 }
 </script>

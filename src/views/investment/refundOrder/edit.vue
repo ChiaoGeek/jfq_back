@@ -31,6 +31,8 @@
           </span>
 
         </div>
+        <navigation></navigation>
+
       </div>
 
 
@@ -39,49 +41,58 @@
        <!-- <inputCom inputName='applyName'   inputWidth="120px" inputHeight="40px" ></inputCom> -->
        <div class="person-info">
           <div class="left">
-             <span class="label">姓名</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
+             <span class="label">姓名</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="right">
              <span class="label">管家</span>
              <span class="input">
-               <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-             <span>
+               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="middle">
             <span class="label">电话</span>
             <span class="input">
-              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-            <span>
+              <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+            </span>
           </div>
        </div>
 
        <div class="person-info margin-top">
           <div class="left">
-             <span class="label">总退款金额</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
+             <span class="label">总退款金额</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="right">
              <span class="label">品牌</span>
              <span class="input">
-               <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-             <span>
+               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="middle">
             <span class="label">门店</span>
             <span class="input">
-              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-            <span>
+              <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+            </span>
           </div>
        </div>
 
        <div class="person-info margin-top">
           <div class="left">
-             <span class="label">业务经理</span> <span class="input"><inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom><span>
+             <span class="label">业务经理</span>
+             <span class="input">
+               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+             </span>
           </div>
           <div class="middle">
             <span class="label">门店退款金额</span>
             <span class="input">
-              <inputCom inputName='applyName'   inputWidth="180px" inputHeight="40px" ></inputCom>
-            <span>
+              <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+            </span>
           </div>
        </div>
 
@@ -92,7 +103,7 @@
 
 <script>
 import right from "components/right/right.vue";
-import inputCom from "components/input/input.vue";
+import navigation from "components/nav/index.vue";
 export default {
   name: 'roEdit',
   data () {
@@ -110,7 +121,7 @@ export default {
   },
   components:{
     right,
-    inputCom
+    navigation
   }
 }
 </script>
@@ -249,5 +260,17 @@ export default {
 
 
 }
-
+.inputtext{
+  border: 1px solid rgb(86, 142, 194);
+  width: 150px;
+  height: 40px;
+  color: #393939;
+  font-size: 18px;
+  line-height: 40px;
+  text-align: left;
+  font-family: PingFangSC-Regular;
+  border-radius: 4.5px;	/* relative value */
+  -moz-border-radius: 4.5px;
+  -webkit-border-radius: 4.5px;
+}
 </style>
