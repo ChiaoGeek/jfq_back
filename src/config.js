@@ -1,5 +1,4 @@
 var requestUrl = {
-  urlBase: 'http://wangyb.net:8080'
-  
+  urlBase: 'http://192.168.1.120:8080'
 };
 export default requestUrl

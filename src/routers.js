@@ -1,6 +1,7 @@
 import Router from 'vue-router'
 
 // import leftDown from 'components/left-down/left-down'
+import login from './views/login/index'
 import investmentIndex from './views/investment/index'
 import marketIndex from './views/market/index'
 import engineeringIndex from './views/engineering/index'
@@ -11,6 +12,7 @@ export default new Router({
   mode: 'history',
   scrollBehavior: () => ({ y: 0 }),
   routes: [
+    { name: 'login',path: '/', component: login },
     { name: 'investmentIndex',path: '/investment/index', component: investmentIndex },
     { name: 'marketIndex',path: '/market/index', component: marketIndex },
     { name: 'engineeringIndex',path: '/engineering/index', component: engineeringIndex },

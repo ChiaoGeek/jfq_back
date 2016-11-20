@@ -6,7 +6,7 @@
           {{itemPara}}
         </div>
         <div id="right-up-icon">
-          <span class="rui-icon-text">
+          <span class="rui-icon-text" @click='save()'>
             <a href="#" class="rui-icon">
               <img src="../../../../static/img/save.png" alt="" />
             </a>
@@ -43,19 +43,19 @@
           <div class="left">
              <span class="label">银行</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.bank.name" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
           <div class="right">
              <span class="label">支行</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.name" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
           <div class="middle">
             <span class="label">分行</span>
             <span class="input">
-              <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+              <input type="text" class="inputtext" name="name" v-model="listRes.branchName" :style="{width: '180px', height: '40px'}">
             </span>
           </div>
        </div>
@@ -64,19 +64,19 @@
           <div class="left">
              <span class="label">网点</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.subbranchName" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
           <div class="right">
              <span class="label">负责人</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.chargeName" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
           <div class="middle">
             <span class="label">期数(多个)</span>
             <span class="input">
-              <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+              <input type="text" class="inputtext" name="name" v-model="listRes.bankBranchPeriods" :style="{width: '180px', height: '40px'}">
             </span>
           </div>
        </div>
@@ -85,14 +85,14 @@
           <div class="left">
              <span class="label">付息方式</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.payInterestType" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
           <div class="middle">
              <span class="label">推荐人(多个)</span>
 
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.referrals" :style="{width: '180px', height: '40px'}">
 
              </span>
           </div>
@@ -106,23 +106,56 @@
 <script>
 import right from "components/right/right.vue";
 import navigation from "components/nav/index.vue";
-
+import commonJs from "src/common.js";
 export default {
   name: 'nmEdit',
   data () {
     return {
-      appt: [],
+      listRes: {
+        bank: {}
+      },
+
     }
   },
   props: ['itemPara'],
   computed: {},
-  mounted () {},
+  mounted () {
+    //服务器基本地址
+    var urlbase = this.$http.options.root;
+    //请求的URL
+    var resUrl = urlbase+'/loanapplicant/api/bank-branches/'+this.itemPara;
+
+    this.$http.get(resUrl).then(
+      (response)=>{
+        //查询出服务器的数据
+        this.listRes = response.body.data;
+
+      },
+      (err)=>{
+        console.log(err);
+      }
+    );
+  },
   methods: {
     cancel: function(componentName, event){
 
        var obj = {componentName:componentName};
        this.$emit('cancelEdit', obj);
-    }
+    },
+    save: function(){
+      var urlbase = this.$http.options.root;
+      var resUrl = urlbase+'/loanapplicant/api/bank-branches/';
+      this.$http.put(resUrl, this.listRes).then(
+        (response)=>{
+          //查询出服务器的数据
+           commonJs.savaSuccess('数据保存成功！！！');
+
+        },
+        (err)=>{
+          console.log(err);
+        }
+      );
+    },
   },
   components:{
     right,

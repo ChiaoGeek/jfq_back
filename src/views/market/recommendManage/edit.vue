@@ -43,19 +43,19 @@
           <div class="left">
              <span class="label">姓名</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.fullname" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
           <div class="right">
              <span class="label">银行</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.bankBranch.bank.name" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
           <div class="middle">
             <span class="label">电话</span>
             <span class="input">
-              <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+              <input type="text" class="inputtext" name="name" v-model="listRes.mobile" :style="{width: '180px', height: '40px'}">
             </span>
           </div>
        </div>
@@ -64,19 +64,19 @@
           <div class="left">
              <span class="label">分行</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.bankBranch.name" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
           <div class="right">
              <span class="label">网点</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.bankBranch.subbranchName" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
           <div class="middle">
             <span class="label">支行</span>
             <span class="input">
-              <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+              <input type="text" class="inputtext" name="name" v-model="listRes.bankBranch.branchName" :style="{width: '180px', height: '40px'}">
             </span>
           </div>
        </div>
@@ -85,7 +85,7 @@
           <div class="left">
              <span class="label">推荐码</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.referralCode" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
        </div>
@@ -102,12 +102,35 @@ export default {
   name: 'rmEdit',
   data () {
     return {
-      appt: [],
+      listRes: {
+        bankBranch: {
+          bank: {}
+        }
+      },
     }
   },
   props: ['itemPara'],
   computed: {},
-  mounted () {},
+  mounted () {
+    //服务器基本地址
+    var urlbase = this.$http.options.root;
+    this.imgUrlBase = this.$http.options.imgRoot;
+    //请求的URL
+    var resUrl = urlbase+'/loanapplicant/api/referrals/'+this.itemPara;
+
+    this.$http.get(resUrl).then(
+      (response)=>{
+        //查询出服务器的数据
+        this.listRes = response.body.data;
+
+
+
+      },
+      (err)=>{
+        console.log(err);
+      }
+    );
+  },
   methods: {
     cancel: function(componentName, event){
 

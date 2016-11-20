@@ -129,7 +129,7 @@ export default {
     //服务器基本地址
     var urlbase = this.$http.options.root;
     //请求的URL
-    var resUrl = urlbase+'/merchant/api/brands?page=0&size='+this.perSize+'&sort=id,ASC';
+    var resUrl = urlbase+'/loanapplicant/api/banks?page=0&size='+this.perSize+'&sort=id,ASC';
 
     this.$http.get(resUrl).then(
       (response)=>{
@@ -165,7 +165,7 @@ export default {
       //服务器基本地址
       var urlbase = this.$http.options.root;
       //请求的URL
-      var resUrl = urlbase+'/merchant/api/brands?page=0&size='+this.perSize+'&sort=id,ASC&filter='+this.filterString;
+      var resUrl = urlbase+'/loanapplicant/api/banks?page=0&size='+this.perSize+'&sort=id,ASC&filter='+this.filterString;
 
       this.$http.get(resUrl).then(
         (response)=>{
@@ -191,9 +191,9 @@ export default {
       //请求的URL
       //判断是否是查询还是正常显示
       if(this.filterString){
-        var resUrl = urlbase+'/merchant/api/brands?page='+page+'&size='+this.perSize+'&sort=id,ASC&filter='+this.filterString;
+        var resUrl = urlbase+'/loanapplicant/api/banks?page='+page+'&size='+this.perSize+'&sort=id,ASC&filter='+this.filterString;
       }else{
-        var resUrl = urlbase+'/merchant/api/brands?page='+page+'&size='+this.perSize+'&sort=id,ASC';
+        var resUrl = urlbase+'/loanapplicant/api/banks?page='+page+'&size='+this.perSize+'&sort=id,ASC';
       }
 
       this.$http.get(resUrl).then(

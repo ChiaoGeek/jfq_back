@@ -85,7 +85,7 @@
 
           </tr>
 
-          <tr v-for="todo in lastRes">
+          <tr v-for="todo in listRes">
             <td @click="edit(todo.userId, $event);" style="cursor:pointer;">编辑</td>
             <td>{{todo.userId}}</td>
             <td>{{todo.nickname }}</td>
@@ -111,8 +111,8 @@ export default {
   name: 'serviceManage',
   data () {
     return {
-      listRes: [], //服务器端查询的数据
-      lastRes: [],
+      listRes: {}, //服务器端查询的数据
+      lastRes: {},
 
       //需要查询的字段
       nickname: '',
@@ -132,36 +132,13 @@ export default {
   mounted () {
     //服务器基本地址
     var urlbase = this.$http.options.root;
-
     //请求的URL
-    var resUrl = urlbase+'/user/api/admin/serviceManagerProfiles?page=0&size='+this.perSize+'&sort=userId,ASC';
-
+    var resUrl = urlbase+'/merchant/api/service-managers?page=0&size='+this.perSize+'&sort=id,ASC';
+   console.log(resUrl);
     this.$http.get(resUrl).then(
       (response)=>{
         //查询出服务器的数据
         this.listRes = response.body.data;
-        /***
-        查询门店
-        ***/
-        var that = this;
-        var aggraRes = this.listRes.map(function(obj){//返回合并的结果
-
-          var resUrl2 = urlbase+'/merchant/api/stores?filter=userId:'+obj.userId;
-          that.$http.get(resUrl2).then(
-            (response)=>{
-              //查询出服务器的数据
-              obj.listRes2 = response.body.data;
-              that.lastRes.push(obj);
-            },
-            (err)=>{
-              console.log(err);
-            }
-          );
-        }
-      );
-
-
-
         //得到总页数
         this.allPageNumber = response.body.meta.pageCount;
         //获取当前页面 需要加一
@@ -172,11 +149,6 @@ export default {
         console.log(err);
       }
     );
-
-    //门店查询
-    //请求的URL
-
-
 
   },
   methods: {

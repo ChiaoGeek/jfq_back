@@ -92,13 +92,13 @@
           <tr v-for="todo in listRes">
             <td @click="edit(todo.id, $event);" style="cursor:pointer;">编辑</td>
             <td>{{todo.id}}</td>
-            <td>{{todo.name}}</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
+            <td>{{todo.fullname}}</td>
+            <td>{{todo.mobile}}</td>
+            <td>{{todo.bankBranch.bank.name}}</td>
+            <td>{{todo.bankBranch.name}}</td>
+            <td>{{todo.bankBranch.branchName}}</td>
+            <td>{{todo.bankBranch.subbranchName}}</td>
+            <td>{{todo.referralCode}}</td>
 
 
 
@@ -124,6 +124,7 @@ export default {
 
       //需要查询的字段
       name: '',
+      available: '',
 
 
       form: {}, //把搜索的字段封装成数组
@@ -140,8 +141,8 @@ export default {
     //服务器基本地址
     var urlbase = this.$http.options.root;
     //请求的URL
-    var resUrl = urlbase+'/merchant/api/brands?page=0&size='+this.perSize+'&sort=id,ASC';
-
+    var resUrl = urlbase+'/loanapplicant/api/referrals?page=0&size='+this.perSize+'&sort=id,ASC';
+   console.log(resUrl);
     this.$http.get(resUrl).then(
       (response)=>{
         //查询出服务器的数据
@@ -176,7 +177,7 @@ export default {
       //服务器基本地址
       var urlbase = this.$http.options.root;
       //请求的URL
-      var resUrl = urlbase+'/merchant/api/brands?page=0&size='+this.perSize+'&sort=id,ASC&filter='+this.filterString;
+      var resUrl = urlbase+'/loanapplicant/api/referrals?page=0&size='+this.perSize+'&sort=id,ASC&filter='+this.filterString;
 
       this.$http.get(resUrl).then(
         (response)=>{
@@ -202,9 +203,9 @@ export default {
       //请求的URL
       //判断是否是查询还是正常显示
       if(this.filterString){
-        var resUrl = urlbase+'/merchant/api/brands?page='+page+'&size='+this.perSize+'&sort=id,ASC&filter='+this.filterString;
+        var resUrl = urlbase+'/loanapplicant/api/referrals?page='+page+'&size='+this.perSize+'&sort=id,ASC&filter='+this.filterString;
       }else{
-        var resUrl = urlbase+'/merchant/api/brands?page='+page+'&size='+this.perSize+'&sort=id,ASC';
+        var resUrl = urlbase+'/loanapplicant/api/referrals?page='+page+'&size='+this.perSize+'&sort=id,ASC';
       }
 
       this.$http.get(resUrl).then(

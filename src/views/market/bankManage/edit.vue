@@ -5,7 +5,7 @@
         <div id="right-up-text">
           {{itemPara}}
         </div>
-        <div id="right-up-icon">
+        <div id="right-up-icon" @click='save()'>
           <span class="rui-icon-text">
             <a href="#" class="rui-icon">
               <img src="../../../../static/img/save.png" alt="" />
@@ -43,7 +43,7 @@
           <div class="left">
              <span class="label">银行名称</span>
              <span class="input">
-               <input type="text" class="inputtext" name="name" v-model="appt.customerName" :style="{width: '180px', height: '40px'}">
+               <input type="text" class="inputtext" name="name" v-model="listRes.name" :style="{width: '180px', height: '40px'}">
              </span>
           </div>
 
@@ -58,22 +58,53 @@
 <script>
 import right from "components/right/right.vue";
 import navigation from "components/nav/index.vue";
+import commonJs from "src/common.js";
 export default {
   name: 'bankEdit',
   data () {
     return {
-      appt: [],
+      listRes: {},
     }
   },
   props: ['itemPara'],
   computed: {},
-  mounted () {},
+  mounted () {
+    //服务器基本地址
+    var urlbase = this.$http.options.root;
+    //请求的URL
+    var resUrl = urlbase+'/loanapplicant/api/banks/'+this.itemPara;
+
+    this.$http.get(resUrl).then(
+      (response)=>{
+        //查询出服务器的数据
+        this.listRes = response.body.data;
+
+      },
+      (err)=>{
+        console.log(err);
+      }
+    );
+  },
   methods: {
     cancel: function(componentName, event){
 
        var obj = {componentName:componentName};
        this.$emit('cancelEdit', obj);
-    }
+    },
+    save: function(){
+      var urlbase = this.$http.options.root;
+      var resUrl = urlbase+'/loanapplicant/api/banks/';
+      this.$http.put(resUrl, this.listRes).then(
+        (response)=>{
+          //查询出服务器的数据
+           commonJs.savaSuccess('数据保存成功！！！');
+
+        },
+        (err)=>{
+          console.log(err);
+        }
+      );
+    },
   },
   components:{
     right,
